@@ -1,12 +1,18 @@
 package ar.utn.frba.mobile.plantis
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import ar.utn.frba.mobile.plantis.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var binding: MainActivityBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        binding.navigationbar.itemIconTintList = null
     }
 }
