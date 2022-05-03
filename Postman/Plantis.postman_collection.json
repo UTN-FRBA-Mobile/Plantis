@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "0a0f5607-9ef2-4437-ab81-6015764fc7f6",
+		"name": "Plantis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Plant Identification",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"images\":[ \"{{img}}\" ],\r\n\"api_key\":\"{{api_key}}\",\r\n\"plant_details\":[\"common_names\",\"url\",\"name_authority\",\"wiki_description\",\"taxonomy\",\"synonyms\"],\r\n\"modifiers\":[\"crops_fast\",\"similar_images\"],\r\n\"plant_language\":\"en\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://api.plant.id/v2/identify",
+					"protocol": "https",
+					"host": [
+						"api",
+						"plant",
+						"id"
+					],
+					"path": [
+						"v2",
+						"identify"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usage info",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{api_key}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_key",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"api_key\":\"{{api_key}}\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.plant.id/v2/usage_info",
+					"protocol": "https",
+					"host": [
+						"api",
+						"plant",
+						"id"
+					],
+					"path": [
+						"v2",
+						"usage_info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health Assessment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"images\":[ \"{{img_sick}}\" ],\r\n\"api_key\":\"{{api_key}}\",\r\n\"plant_language\":\"en\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.plant.id/v2/health_assessment",
+					"protocol": "https",
+					"host": [
+						"api",
+						"plant",
+						"id"
+					],
+					"path": [
+						"v2",
+						"health_assessment"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
