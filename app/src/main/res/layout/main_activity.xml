@@ -32,6 +32,8 @@
         android:layout_height="wrap_content"
         app:menu="@menu/menu"
         android:background="@color/lightgray"
-        />
+        app:labelVisibilityMode="labeled"
+        app:itemIconSize="45dp"
+        android:minHeight="80dp"/>
 
 </LinearLayout>
