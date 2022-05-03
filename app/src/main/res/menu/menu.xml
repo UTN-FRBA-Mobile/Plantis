@@ -7,6 +7,6 @@
 
     <item
         android:id="@+id/searchFragment"
-        android:icon="@mipmap/ic_my_garden"
+        android:icon="@mipmap/ic_search"
         android:title="@string/search" />
 </menu>
