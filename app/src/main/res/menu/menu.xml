@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/myGardenFragment"
+        android:icon="@mipmap/ic_my_garden"
+        android:title="@string/my_garden" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@mipmap/ic_search"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/remindersFragment"
+        android:icon="@mipmap/ic_reminders"
+        android:title="@string/reminders" />
+
+    <item
+        android:id="@+id/drPlantisFragment"
+        android:icon="@mipmap/ic_dr_plantis"
+        android:title="@string/dr_plantis" />
+</menu>

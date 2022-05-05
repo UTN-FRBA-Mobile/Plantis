@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/myGardenFragment">
+
+    <fragment
+        android:id="@+id/myGardenFragment"
+        android:name="ar.utn.frba.mobile.plantis.fragments.MyGardenFragment"
+        android:label="fragment_my_garden"
+        tools:layout="@layout/fragment_my_garden" />
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="ar.utn.frba.mobile.plantis.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/remindersFragment"
+        android:name="ar.utn.frba.mobile.plantis.fragments.RemindersFragment"
+        android:label="fragment_reminders"
+        tools:layout="@layout/fragment_reminders" />
+
+    <fragment
+        android:id="@+id/drPlantisFragment"
+        android:name="ar.utn.frba.mobile.plantis.fragments.DrPlantisFragment"
+        android:label="fragment_dr_plantis"
+        tools:layout="@layout/fragment_dr_plantis" />
+</navigation>
