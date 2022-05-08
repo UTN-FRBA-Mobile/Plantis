@@ -101,12 +101,14 @@
                     android:src="@drawable/ic_baseline_info_24" />
 
                 <TextView
+                    android:id="@+id/wiki_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="Link de wikipedia"
-                    android:textStyle="bold" />
+                    android:text="Learn More"
+                    android:onClick="getUrlFromIntent"
+                    />
             </LinearLayout>
             <!-- Line to separate items -->
             <View
@@ -130,7 +132,6 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="20dp"
