@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
