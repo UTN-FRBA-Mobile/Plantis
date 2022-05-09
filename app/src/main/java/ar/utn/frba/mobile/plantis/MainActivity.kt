@@ -28,12 +28,4 @@ class MainActivity : AppCompatActivity() {
         navView.itemIconTintList = null
         navView.setupWithNavController(navController)
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        System.out.println("Boton Result")
-//        if (requestCode == 1 && resultCode == RESULT_OK) {
-//            System.out.println("Boton ???????")
-//        }
-//        super.onActivityResult(requestCode, resultCode, data)
-//    }
 }
