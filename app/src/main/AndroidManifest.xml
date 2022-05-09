@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="ar.utn.frba.mobile.plantis"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -12,8 +13,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/SplashTheme"
-            >
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,8 +27,7 @@
 
                 <data
                     android:scheme="https"
-                    android:host="simple.wikipedia.org"
-                    android:pathPrefix="/wikipedia/" />
+                    android:host="en.wikipedia.org" />
             </intent-filter>
         </activity>
     </application>
