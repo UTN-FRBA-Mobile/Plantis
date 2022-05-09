@@ -1,5 +1,7 @@
 package ar.utn.frba.mobile.plantis
 
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -26,4 +28,12 @@ class MainActivity : AppCompatActivity() {
         navView.itemIconTintList = null
         navView.setupWithNavController(navController)
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        System.out.println("Boton Result")
+//        if (requestCode == 1 && resultCode == RESULT_OK) {
+//            System.out.println("Boton ???????")
+//        }
+//        super.onActivityResult(requestCode, resultCode, data)
+//    }
 }
