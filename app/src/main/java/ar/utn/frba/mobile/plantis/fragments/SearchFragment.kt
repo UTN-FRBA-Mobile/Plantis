@@ -42,10 +42,7 @@ class SearchFragment : Fragment() {
         startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        System.out.println(requestCode)
-        System.out.println(resultCode)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            System.out.println("Boton Result!!!")
             val imageBitmap = data?.extras?.get("data") as Bitmap
             imageView?.setImageBitmap(imageBitmap)
         }
