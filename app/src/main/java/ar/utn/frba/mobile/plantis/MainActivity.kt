@@ -26,12 +26,12 @@ class MainActivity : AppCompatActivity() {
         val navView = binding.navigationbar
         navView.itemIconTintList = null
         navView.setupWithNavController(navController)
+
     }
 
+
     fun getUrlFromIntent(view: View) {
-        val url = "https://simple.wikipedia.org/wiki/Chlorophytum_comosum"
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
+        val link = "https://simple.wikipedia.org/wiki/Chlorophytum_comosum"
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
     }
 }
