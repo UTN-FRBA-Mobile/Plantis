@@ -1,13 +1,14 @@
 package ar.utn.frba.mobile.plantis
 
-import android.os.Bundle
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import ar.utn.frba.mobile.plantis.databinding.MainActivityBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: MainActivityBinding
@@ -25,5 +26,12 @@ class MainActivity : AppCompatActivity() {
         val navView = binding.navigationbar
         navView.itemIconTintList = null
         navView.setupWithNavController(navController)
+    }
+
+    fun getUrlFromIntent(view: View) {
+        val url = "https://simple.wikipedia.org/wiki/Chlorophytum_comosum"
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 }
