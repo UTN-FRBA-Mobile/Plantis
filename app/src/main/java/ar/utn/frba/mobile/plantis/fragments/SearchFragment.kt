@@ -1,6 +1,5 @@
 package ar.utn.frba.mobile.plantis.fragments
 
-import android.R.attr
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
@@ -35,20 +34,20 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    val REQUEST_IMAGE_CAPTURE = 1
+    val REQUEST_IMAGE_CAPTURE = 1888
 
+    @Suppress("DEPRECATION")
     private fun dispatchTakePictureIntent() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent, 1888)
+        startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        System.out.println("Boton Result!!!")
+        System.out.println(requestCode)
+        System.out.println(resultCode)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            System.out.println("Boton Result!!!")
             val imageBitmap = data?.extras?.get("data") as Bitmap
-            val selectedImage: Uri? = data.getData()
-            val bitmap =
-                BitmapFactory.decodeStream(getActivity()?.getContentResolver()?.openInputStream(selectedImage as Uri))
-            imageView?.setImageBitmap(bitmap)
+            imageView?.setImageBitmap(imageBitmap)
         }
     }
 }
