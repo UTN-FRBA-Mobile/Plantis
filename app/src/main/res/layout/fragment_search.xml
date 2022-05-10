@@ -24,7 +24,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="400dp"
-        android:text="Tomar foto" />
+        android:text="@string/tomar_foto" />
 
     <Button
         android:id="@+id/next_button"
@@ -32,6 +32,6 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="200dp"
-        android:text="Siguiente"
+        android:text="@string/siguiente"
         android:visibility="invisible" />
 </FrameLayout>
