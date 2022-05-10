@@ -18,27 +18,20 @@ import ar.utn.frba.mobile.plantis.databinding.FragmentSearchBinding
 
 
 class SearchFragment : Fragment() {
-    var imageView: ImageView? = null
-    var button: Button? = null
-    var search_button: Button? = null
+    lateinit var binding: FragmentSearchBinding
     val REQUEST_IMAGE_CAPTURE = 1888
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentSearchBinding.inflate(inflater, container, false)
-        imageView = binding.root.findViewById(R.id.searchImageView)
-        button = binding.root.findViewById(R.id.search_button)
-        search_button = binding.root.findViewById(R.id.next_button)
-        button?.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                dispatchTakePictureIntent()
-            }
-        })
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding.searchButton.setOnClickListener{
+            dispatchTakePictureIntent()
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.next_button).setOnClickListener {
+        binding.nextButton.setOnClickListener {
             val action = R.id.action_fragment_search_to_fragment_search_results
             findNavController().navigate(action)
         }
@@ -53,8 +46,8 @@ class SearchFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
-            imageView?.setImageBitmap(imageBitmap)
-            search_button?.setVisibility(View.VISIBLE)
+            binding.searchImageView.setImageBitmap(imageBitmap)
+            binding.nextButton.setVisibility(View.VISIBLE)
         }
     }
 }

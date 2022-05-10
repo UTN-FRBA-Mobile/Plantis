@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import ar.utn.frba.mobile.plantis.R
 
 class SearchResultsFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
