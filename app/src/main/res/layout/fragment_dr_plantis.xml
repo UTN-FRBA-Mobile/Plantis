@@ -9,4 +9,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/dr_plantis" />
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/ic_dr_plantis"
+        android:id="@+id/drplantis_searchImageView" />
+
+    <Button
+        android:id="@+id/drplantis_search_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="400dp"
+        android:text="@string/tomar_foto" />
+
+    <Button
+        android:id="@+id/drplantis_next_button"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="200dp"
+        android:text="@string/siguiente"
+        android:visibility="invisible" />
+
 </FrameLayout>

@@ -35,7 +35,11 @@
         android:id="@+id/drPlantisFragment"
         android:name="ar.utn.frba.mobile.plantis.fragments.DrPlantisFragment"
         android:label="fragment_dr_plantis"
-        tools:layout="@layout/fragment_dr_plantis" />
+        tools:layout="@layout/fragment_dr_plantis" >
+        <action
+            android:id="@+id/action_drPlantisFragment_to_drPlantisSearchResultsFragment"
+            app:destination="@id/drPlantisSearchResultsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/myPlantisFragment"
@@ -49,4 +53,9 @@
         android:label="fragment_search_results"
         tools:layout="@layout/fragment_search_results"
         />
+    <fragment
+        android:id="@+id/drPlantisSearchResultsFragment"
+        android:name="ar.utn.frba.mobile.plantis.fragments.DrPlantisSearchResultsFragment"
+        android:label="fragment_dr_plantis_search_results"
+        tools:layout="@layout/fragment_dr_plantis_search_results" />
 </navigation>
