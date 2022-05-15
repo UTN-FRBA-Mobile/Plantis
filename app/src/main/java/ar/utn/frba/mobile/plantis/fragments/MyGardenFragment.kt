@@ -30,16 +30,12 @@ class MyGardenFragment : Fragment() {
         val listaPlantas = listOf<String>("Potus", "Suculenta", "Cactus", "Margarita","Potus", "Suculenta", "Cactus", "Margarita","Potus", "Suculenta", "Cactus", "Margarita","Potus", "Suculenta", "Cactus", "Margarita")
 
         val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = GardenAdapter(listaPlantas)
+        val viewAdapter = GardenAdapter(view,listaPlantas)
 
         recyclerView = view.findViewById<RecyclerView>(R.id.my_recycler_view).apply{
             layoutManager = viewManager
             adapter = viewAdapter
         }
 
-//        view.findViewById<Button>(R.id.toMyPlantisDetail).setOnClickListener {
-//            val action = R.id.action_myGardenFragment_to_myPlantisFragment
-//            findNavController().navigate(action)
-//        }
     }
 }
