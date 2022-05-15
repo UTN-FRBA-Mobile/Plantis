@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,10 +23,12 @@ class GardenAdapter(val view: View, val listaPlantas: List<String>) : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: GardenViewHolder, position: Int) {
-        holder.plantTextView.text = listaPlantas[position]
+        val plantName = listaPlantas[position]
+        holder.plantTextView.text = plantName
         holder.plantItem.setOnClickListener {
             val action = R.id.action_myGardenFragment_to_myPlantisFragment
-            findNavController(view).navigate(action)
+            val bundle = bundleOf("Name" to plantName)
+            findNavController(view).navigate(action, bundle)
         }
     }
 
