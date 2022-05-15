@@ -4,11 +4,11 @@ import org.json.JSONObject
 
 object PlantIdMock : PlantIdentifierAPI{
     override fun identifyPlantFromImage(filePath: String): List<PlantIdentification> {
-        return suggestions(jsonStringResponse)
+        return getSuggestionsFromResponse(jsonStringResponse)
     }
 
-    private fun suggestions(jsonIdentification: String): List<PlantIdentification> {
-        val json = JSONObject(jsonIdentification)
+    private fun getSuggestionsFromResponse(jsonResponse: String): List<PlantIdentification> {
+        val json = JSONObject(jsonResponse)
         val data = json.optJSONArray("suggestions")
         return data.let { 0.until(it.length()).map { i -> it.optJSONObject(i) } }
             .map{ suggestion -> PlantIdentification(plantNameFrom(suggestion), imageURLFrom(suggestion), probabilityFrom(suggestion))}
@@ -69,7 +69,7 @@ object PlantIdMock : PlantIdentifierAPI{
                "license_url":"https://creativecommons.org/licenses/by-sa/3.0/"
             },
             "wiki_image":{
-               "value":"https://plant...f.jpg",
+               "value":"https://images.unsplash.com/photo-1554631221-f9603e6808be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8&w=1000&q=80",
                "citation":"P\u00f6ll\u00f6",
                "license_name":"CC BY 3.0",
                "license_url":"https://creativecommons.org/licenses/by/3.0/"
@@ -143,7 +143,7 @@ object PlantIdMock : PlantIdentifierAPI{
                "license_url":"https://creativecommons.org/licenses/by-sa/3.0/"
             },
             "wiki_image":{
-               "value":"https://plant...4.jpg",
+               "value":"https://redsquareflowers.com/wp-content/uploads/2020/12/Cactus-plants-madison-wi.jpg",
                "citation":"Javier martin",
                "license_name":"CC0",
                "license_url":"https://creativecommons.org/publicdomain/zero/1.0/"
