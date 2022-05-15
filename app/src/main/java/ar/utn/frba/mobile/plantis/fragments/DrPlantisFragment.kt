@@ -32,8 +32,8 @@ class DrPlantisFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.drplantisNextButton.setOnClickListener { //TODO
-           // val action = R.id.
-            findNavController().navigate(action)
+           val action = R.id.action_drPlantisFragment_to_drPlantisSearchResultsFragment
+           findNavController().navigate(action)
         }
     }
 
