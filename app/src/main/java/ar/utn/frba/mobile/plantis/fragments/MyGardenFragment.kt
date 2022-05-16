@@ -27,7 +27,9 @@ class MyGardenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listaPlantas = listOf<String>("Potus", "Suculenta", "Cactus", "Margarita","Potus", "Suculenta", "Cactus", "Margarita","Potus", "Suculenta", "Cactus", "Margarita","Potus", "Suculenta", "Cactus", "Margarita")
+        val listaPlantas = listOf<String>("Potus", "Suculenta", "Cactus","Helecho", "Albahaca", "Perejil", "Romero",
+        "Menta", "Oregano", "Tomillo", "Salvia", "Eneldo", "Cilantro", "Lavanda", "Aloe vera", "Hibiscus", "Orquidea", "Gardenia",
+        "Jazmin", "Rosa", "Cala", "Geranio", "Violeta", "Margarita")
 
         val viewManager = LinearLayoutManager(this.context)
         val viewAdapter = GardenAdapter(view,listaPlantas)
