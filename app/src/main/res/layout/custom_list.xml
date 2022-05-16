@@ -37,9 +37,8 @@
 
         <ImageView
             android:id="@+id/info"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/ic_info_foreground"
-            android:contentDescription="@string/imagen_de_la_planta" />
+            app:srcCompat="@drawable/ic_baseline_info_24" />
 </LinearLayout>
