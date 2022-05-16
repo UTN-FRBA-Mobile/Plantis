@@ -9,10 +9,10 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import ar.utn.frba.mobile.plantis.client.PlantIdentification
+import ar.utn.frba.mobile.plantis.client.Suggestion
 import com.bumptech.glide.Glide
 
-class SearchResultsAdapter(val view: View, private val suggestions: List<PlantIdentification>) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
+class SearchResultsAdapter(val view: View, private val suggestions: List<Suggestion>) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
 
     class SearchResultsViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.title)
@@ -31,7 +31,7 @@ class SearchResultsAdapter(val view: View, private val suggestions: List<PlantId
         val plantName = suggestions[position].plantName
         val context = holder.context
 
-        Glide.with(context).load(suggestions[position].imageURL).into(holder.icon)
+        Glide.with(context).load(suggestions[position].plantDetails?.wikiImage?.value).into(holder.icon)
         holder.titleText.text = plantName
         holder.subtitleText.text = context.getString(R.string.Probabibilidad,"%.2f".format(suggestions[position].probability))
 

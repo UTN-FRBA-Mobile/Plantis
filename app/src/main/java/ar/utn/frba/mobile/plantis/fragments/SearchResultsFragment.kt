@@ -24,7 +24,7 @@ class SearchResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val suggestions = PlantIdMock.identifyPlantFromImage("")
+        val suggestions = PlantIdMock(this.requireContext()).identifyPlantFromImage("")
 
         val viewManager = LinearLayoutManager(this.context)
         val viewAdapter = SearchResultsAdapter(view, suggestions)

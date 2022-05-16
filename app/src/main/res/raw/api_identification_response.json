@@ -1,0 +1,155 @@
+{
+  "id":22062232,
+  "suggestions":[
+    {
+      "id":148452111,
+      "plant_name":"Taraxacum officinale",
+      "plant_details":{
+        "common_names":[
+          "common dandelion"
+        ],
+        "edible_parts":[
+          "flowers",
+          "leaves"
+        ],
+        "propagation_methods":[
+          "division",
+          "seeds"
+        ],
+        "synonyms":[
+          "Chondrilla taraxacum",
+          "Leontodon taraxacum",
+          "Leontodon taraxacum var. vulgare",
+          "Leontodon vulgaris",
+          "Taraxacum dens-leonis",
+          "Taraxacum officinale subsp. vulgare",
+          "Taraxacum palustre var. vulgare",
+          "Taraxacum taraxacum",
+          "Taraxacum vulgare"
+        ],
+        "taxonomy":{
+          "class":"Magnoliopsida",
+          "family":"Asteraceae",
+          "genus":"Taraxacum",
+          "kingdom":"Plantae",
+          "order":"Asterales",
+          "phylum":"Magnoliophyta"
+        },
+        "url":"https://en.wikipedia.org/wiki/Taraxacum_officinale",
+        "wiki_description":{
+          "value":"Taraxacum officinale, the common dandelion (often simply called \"dandelion\"), is a flowering herbaceous...",
+          "citation":"https://en.wikipedia.org/wiki/Taraxacum_officinale",
+          "license_name":"CC BY-SA 3.0",
+          "license_url":"https://creativecommons.org/licenses/by-sa/3.0/"
+        },
+        "wiki_image":{
+          "value":"https://images.unsplash.com/photo-1554631221-f9603e6808be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHx8&w=1000&q=80",
+          "citation":"P\u00f6ll\u00f6",
+          "license_name":"CC BY 3.0",
+          "license_url":"https://creativecommons.org/licenses/by/3.0/"
+        },
+        "scientific_name":"Taraxacum officinale",
+        "structured_name":{
+          "genus":"taraxacum",
+          "species":"officinale"
+        }
+      },
+      "probability":0.8093659420386023,
+      "confirmed":false,
+      "similar_images":[
+        {
+          "id":"4be03de02e22a9a9c834052eb0eb39bb",
+          "similarity":0.6665844130453076,
+          "url":"https://plant...0eb39bb.jpg",
+          "url_small":"https://plant...0eb39bb.small.jpg"
+        },
+        {
+          "id":"fd921e3d368b2135c1e480bcda448e25",
+          "similarity":0.38957578260133574,
+          "url":"https://plant...a448e25.jpg",
+          "url_small":"https://plant...a448e25.small.jpg"
+        }
+      ]
+    },
+    {
+      "id":148452112,
+      "plant_name":"Taraxacum erythrospermum",
+      "plant_details":{
+        "common_names":[
+          "red-seeded dandelion"
+        ],
+        "edible_parts":[
+          "flowers",
+          "leaves"
+        ],
+        "propagation_methods":null,
+        "synonyms":[
+          "Leontodon erythrospermum",
+          "Leontodon erythrospermus",
+          "Leontodon laevigatus",
+          "Leontodon taraxacum var. laevigatus",
+          "Taraxacum austriacum",
+          "Taraxacum austriacum var. denubium",
+          "Taraxacum austriacum var. punctatum",
+          "Taraxacum laevigatum",
+          "Taraxacum laevigatum f. scapifolium",
+          "Taraxacum laevigatum var. erythrospermum",
+          "Taraxacum officinale var. erythrospermum",
+          "Taraxacum officinale var. laevigatum",
+          "Taraxacum punctatum",
+          "Taraxacum scanicum",
+          "Taraxacum taraxacum var. laevigatum",
+          "Taraxacum tauricum"
+        ],
+        "taxonomy":{
+          "class":"Magnoliopsida",
+          "family":"Asteraceae",
+          "genus":"Taraxacum",
+          "kingdom":"Plantae",
+          "order":"Asterales",
+          "phylum":"Magnoliophyta"
+        },
+        "url":"https://en.wikipedia.org/wiki/Taraxacum_erythrospermum",
+        "wiki_description":{
+          "value":"Taraxacum erythrospermum, known by the common name red-seeded dandelion, is a species of dandelion...",
+          "citation":"https://en.wikipedia.org/wiki/Taraxacum_erythrospermum",
+          "license_name":"CC BY-SA 3.0",
+          "license_url":"https://creativecommons.org/licenses/by-sa/3.0/"
+        },
+        "wiki_image":{
+          "value":"https://redsquareflowers.com/wp-content/uploads/2020/12/Cactus-plants-madison-wi.jpg",
+          "citation":"Javier martin",
+          "license_name":"CC0",
+          "license_url":"https://creativecommons.org/publicdomain/zero/1.0/"
+        },
+        "scientific_name":"Taraxacum erythrospermum",
+        "structured_name":{
+          "genus":"taraxacum",
+          "species":"erythrospermum"
+        }
+      },
+      "probability":0.11519229401471831,
+      "confirmed":false,
+      "similar_images":[
+        {
+          "id":"5fda47388d59246a34107f83de074229",
+          "similarity":0.8107533517457877,
+          "url":"https://plant...e074229.jpg",
+          "url_small":"https://plant...e074229.small.jpg",
+          "citation":"Ueli Schmid",
+          "license_name":"CC BY-SA 4.0",
+          "license_url":"https://creativecommons.org/licenses/by-sa/4.0/"
+        },
+        {
+          "id":"0122dbe429a419f9f661f9caabd39837",
+          "similarity":0.47305731789173033,
+          "url":"https://plant...bd39837.jpg",
+          "url_small":"https://plant...bd39837.small.jpg",
+          "citation":"Spencer",
+          "license_name":"CC BY 4.0",
+          "license_url":"https://creativecommons.org/licenses/by/4.0/"
+        }
+      ]
+    }
+  ]
+}
