@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:background="@drawable/shadow"
+    android:background="@drawable/shadow_layout"
     android:layout_margin="10dp">
 
     <ImageView
