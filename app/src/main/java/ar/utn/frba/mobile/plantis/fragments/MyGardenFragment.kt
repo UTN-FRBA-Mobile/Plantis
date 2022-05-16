@@ -38,6 +38,5 @@ class MyGardenFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
-
     }
 }

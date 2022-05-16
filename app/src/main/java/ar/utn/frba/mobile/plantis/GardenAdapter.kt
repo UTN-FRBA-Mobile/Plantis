@@ -10,7 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class GardenAdapter(val view: View, val listaPlantas: List<String>) : RecyclerView.Adapter<GardenAdapter.GardenViewHolder> (){
+class GardenAdapter(val view: View, val listaPlantas: List<String>) : RecyclerView.Adapter<GardenAdapter.GardenViewHolder>() {
 
     class GardenViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val plantItem: LinearLayout= view.findViewById(R.id.plant_item)

@@ -51,8 +51,12 @@
         android:id="@+id/fragment_search_results"
         android:name="ar.utn.frba.mobile.plantis.fragments.SearchResultsFragment"
         android:label="fragment_search_results"
-        tools:layout="@layout/fragment_search_results"
-        />
+        tools:layout="@layout/fragment_search_results" >
+        <action
+            android:id="@+id/action_fragment_search_results_to_myPlantisFragment"
+            app:destination="@id/myPlantisFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/drPlantisSearchResultsFragment"
         android:name="ar.utn.frba.mobile.plantis.fragments.DrPlantisSearchResultsFragment"
