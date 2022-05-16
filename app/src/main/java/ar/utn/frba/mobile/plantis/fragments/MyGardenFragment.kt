@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.GardenAdapter
+import ar.utn.frba.mobile.plantis.PlantDetail
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.databinding.MyGardenFragmentBinding
 
@@ -27,12 +24,22 @@ class MyGardenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listaPlantas = listOf<String>("Potus", "Suculenta", "Cactus","Helecho", "Albahaca", "Perejil", "Romero",
-        "Menta", "Oregano", "Tomillo", "Salvia", "Eneldo", "Cilantro", "Lavanda", "Aloe vera", "Hibiscus", "Orquidea", "Gardenia",
-        "Jazmin", "Rosa", "Cala", "Geranio", "Violeta", "Margarita")
+        val plantList = listOf(
+            PlantDetail("Potus"),
+            PlantDetail("Suculenta"),
+            PlantDetail("Cactus"),
+            PlantDetail("Helecho"),
+            PlantDetail("Albahaca"),
+            PlantDetail("Perejil"),
+            PlantDetail("Romero"),
+            PlantDetail("Menta"),
+            PlantDetail("Oregano"),
+            PlantDetail("Tomillo"),
+            PlantDetail("Salvia")
+        )
 
         val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = GardenAdapter(view,listaPlantas)
+        val viewAdapter = GardenAdapter(view, plantList)
 
         recyclerView = view.findViewById<RecyclerView>(R.id.my_recycler_view).apply{
             layoutManager = viewManager

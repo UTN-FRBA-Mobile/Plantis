@@ -3,14 +3,13 @@ package ar.utn.frba.mobile.plantis
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class GardenAdapter(val view: View, val listaPlantas: List<String>) : RecyclerView.Adapter<GardenAdapter.GardenViewHolder>() {
+class GardenAdapter(val view: View, val plantList: List<PlantDetail>) : RecyclerView.Adapter<GardenAdapter.GardenViewHolder>() {
 
     class GardenViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val plantItem: LinearLayout= view.findViewById(R.id.plant_item)
@@ -23,14 +22,14 @@ class GardenAdapter(val view: View, val listaPlantas: List<String>) : RecyclerVi
     }
 
     override fun onBindViewHolder(holder: GardenViewHolder, position: Int) {
-        val plantName = listaPlantas[position]
-        holder.plantTextView.text = plantName
+        val plant = plantList[position]
+        holder.plantTextView.text = plant.name
         holder.plantItem.setOnClickListener {
             val action = R.id.action_myGardenFragment_to_myPlantisFragment
-            val bundle = bundleOf("Name" to plantName)
+            val bundle = bundleOf("details" to plant)
             findNavController(view).navigate(action, bundle)
         }
     }
 
-    override fun getItemCount() = listaPlantas.size
+    override fun getItemCount() = plantList.size
 }

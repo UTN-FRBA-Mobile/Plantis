@@ -28,19 +28,31 @@ class SearchResultsAdapter(val view: View, private val suggestions: List<Suggest
     }
 
     override fun onBindViewHolder(holder: SearchResultsViewHolder, position: Int) {
-        val plantName = suggestions[position].plantName
+        val suggestion = suggestions[position]
+        val plantName = suggestion.plantName
         val context = holder.context
 
-        Glide.with(context).load(suggestions[position].plantDetails?.wikiImage?.value).into(holder.icon)
+        Glide.with(context).load(suggestion.plantDetails?.wikiImage?.value).into(holder.icon)
         holder.titleText.text = plantName
-        holder.subtitleText.text = context.getString(R.string.Probabibilidad,"%.2f".format(suggestions[position].probability))
+        holder.subtitleText.text = context.getString(R.string.Probabibilidad,"%.2f".format(suggestion.probability))
 
         holder.infoButton.setOnClickListener {
             val action = R.id.action_fragment_search_results_to_myPlantisFragment
-            val bundle = bundleOf("Name" to plantName)
+            val bundle = bundleOf("details" to mapSuggestionToPlantDetail(suggestion))
             findNavController(view).navigate(action, bundle)
         }
     }
 
     override fun getItemCount() = suggestions.size
+
+    private fun mapSuggestionToPlantDetail(suggestion: Suggestion): PlantDetail {
+        val plantDetails = suggestion.plantDetails
+        return PlantDetail(
+            name = plantDetails?.commonNames?.first(),
+            scientificName = plantDetails?.scientificName,
+            description = plantDetails?.wikiDescription?.value,
+            imageUrl = plantDetails?.wikiImage?.value,
+            wikiUrl = plantDetails?.url
+        )
+    }
 }
