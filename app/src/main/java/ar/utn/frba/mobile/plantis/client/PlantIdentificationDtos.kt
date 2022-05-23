@@ -1,7 +1,9 @@
 package ar.utn.frba.mobile.plantis.client
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class PlantIdentificationResponse(
     @JsonProperty("id")
     val id: Int?,
@@ -9,6 +11,7 @@ data class PlantIdentificationResponse(
     val suggestions: List<Suggestion>?
 )
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Suggestion(
     @JsonProperty("confirmed")
     val confirmed: Boolean?,
@@ -23,7 +26,7 @@ data class Suggestion(
     @JsonProperty("similar_images")
     val similarImages: List<SimilarImage>?
 )
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class PlantDetails(
     @JsonProperty("common_names")
     val commonNames: List<String>?,
@@ -46,7 +49,7 @@ data class PlantDetails(
     @JsonProperty("wiki_image")
     val wikiImage: WikiObject?
 )
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class SimilarImage(
     @JsonProperty("citation")
     val citation: String?,
@@ -63,14 +66,14 @@ data class SimilarImage(
     @JsonProperty("url_small")
     val urlSmall: String?
 )
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class StructuredName(
     @JsonProperty("genus")
     val genus: String?,
     @JsonProperty("species")
     val species: String?
 )
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Taxonomy(
     @JsonProperty("class")
     val clazz: String?,
@@ -85,7 +88,7 @@ data class Taxonomy(
     @JsonProperty("phylum")
     val phylum: String?
 )
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class WikiObject(
     @JsonProperty("citation")
     val citation: String?,
