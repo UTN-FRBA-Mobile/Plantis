@@ -24,10 +24,9 @@ class SearchResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val suggestions: List<Suggestion> =
-            arguments?.getParcelableArray("suggestions")?.toList() as List<Suggestion>
+        val suggestions = arguments?.getParcelableArray("suggestions")?.toList()?.filterIsInstance<Suggestion>()
         val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = SearchResultsAdapter(view, suggestions)
+        val viewAdapter = SearchResultsAdapter(view, suggestions!!)
 
         recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view).apply{
             layoutManager = viewManager
