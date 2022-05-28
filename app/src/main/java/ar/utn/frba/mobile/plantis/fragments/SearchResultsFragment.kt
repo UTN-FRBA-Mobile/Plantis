@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.SearchResultsAdapter
-import ar.utn.frba.mobile.plantis.client.PlantIdMock
+import ar.utn.frba.mobile.plantis.client.Suggestion
 import ar.utn.frba.mobile.plantis.databinding.FragmentSearchResultsBinding
 
 class SearchResultsFragment : Fragment() {
@@ -24,8 +24,8 @@ class SearchResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val suggestions = PlantIdMock(this.requireContext()).identifyPlantFromImage("")
-
+        val suggestions: List<Suggestion> =
+            arguments?.getParcelableArray("suggestions")?.toList() as List<Suggestion>
         val viewManager = LinearLayoutManager(this.context)
         val viewAdapter = SearchResultsAdapter(view, suggestions)
 

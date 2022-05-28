@@ -1,16 +1,21 @@
 package ar.utn.frba.mobile.plantis.client
 
+import android.os.Parcelable
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
+@Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class PlantIdentificationResponse(
     @JsonProperty("id")
     val id: Int?,
     @JsonProperty("suggestions")
     val suggestions: List<Suggestion>?
-)
+): Parcelable
 
+@Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Suggestion(
     @JsonProperty("confirmed")
@@ -25,7 +30,9 @@ data class Suggestion(
     val probability: Double?,
     @JsonProperty("similar_images")
     val similarImages: List<SimilarImage>?
-)
+): Parcelable
+
+@Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class PlantDetails(
     @JsonProperty("common_names")
@@ -48,7 +55,9 @@ data class PlantDetails(
     val wikiDescription: WikiObject?,
     @JsonProperty("wiki_image")
     val wikiImage: WikiObject?
-)
+): Parcelable
+
+@Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class SimilarImage(
     @JsonProperty("citation")
@@ -65,14 +74,18 @@ data class SimilarImage(
     val url: String?,
     @JsonProperty("url_small")
     val urlSmall: String?
-)
+): Parcelable
+
+@Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class StructuredName(
     @JsonProperty("genus")
     val genus: String?,
     @JsonProperty("species")
     val species: String?
-)
+): Parcelable
+
+@Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Taxonomy(
     @JsonProperty("class")
@@ -87,7 +100,9 @@ data class Taxonomy(
     val order: String?,
     @JsonProperty("phylum")
     val phylum: String?
-)
+): Parcelable
+
+@Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class WikiObject(
     @JsonProperty("citation")
@@ -98,4 +113,4 @@ data class WikiObject(
     val licenseUrl: String?,
     @JsonProperty("value")
     val value: String?
-)
+): Parcelable
