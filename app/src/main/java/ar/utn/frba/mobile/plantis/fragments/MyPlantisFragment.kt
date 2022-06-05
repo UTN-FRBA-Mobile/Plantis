@@ -37,15 +37,13 @@ class MyPlantisFragment : Fragment() {
         binding.scientificName.text = plantDetails.scientificName
         Glide.with(_context).load(plantDetails.imageUrl).into(binding.plantImage)
 
-        val remindersList = listOf(
-            Reminder("Water", LocalTime.of(17, 0), listOf(DayOfWeek.MONDAY, DayOfWeek.THURSDAY)),
-            Reminder("Renew Ground", LocalTime.of(11, 0), listOf(DayOfWeek.SUNDAY)),
-            Reminder("Fertilize", LocalTime.of(8, 30), listOf(DayOfWeek.TUESDAY)),
-            Reminder("Check", LocalTime.of(7, 0), listOf(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY))
-        )
+        if (plantDetails.reminders.isEmpty()) {
+            binding.remindersLayout.visibility = View.GONE
+            return
+        }
 
         val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = RemindersAdapter(view, remindersList)
+        val viewAdapter = RemindersAdapter(view, plantDetails.reminders)
 
         recyclerView = view.findViewById<RecyclerView>(R.id.plantis_reminders).apply{
             layoutManager = viewManager

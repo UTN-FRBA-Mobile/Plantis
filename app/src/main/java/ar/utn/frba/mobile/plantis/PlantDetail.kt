@@ -7,5 +7,6 @@ data class PlantDetail(
     val scientificName: String? = null,
     val description: String? = null,
     val imageUrl: String? = null,
-    val wikiUrl: String? = null
+    val wikiUrl: String? = null,
+    val reminders: List<Reminder> = emptyList()
 ): Serializable
