@@ -1,156 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragments.MyPlantisFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/graylight"
-    android:orientation="vertical" >
-    
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="405dp">
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:background="@drawable/gradientbackground"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/plant_image"
-                android:layout_width="229dp"
-                android:layout_height="186dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="55dp"
-
-                android:src="@drawable/example_plant"
-                app:civ_border_color="@color/colorPrimaryDark"
-                app:civ_border_width="2dp" />
-
-            <TextView
-                android:id="@+id/my_plant_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="PlantiName"
-                android:textColor="#000"
-                android:textSize="21sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <androidx.cardview.widget.CardView
-            android:layout_width="350dp"
-            android:layout_height="70dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="315dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                android:layout_height="190dp"
+                android:background="@color/oliveGreen"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/plant_image"
+                    android:layout_width="150dp"
+                    android:layout_height="186dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="20dp"
+
+                    android:src="@drawable/example_plant"
+                    app:civ_border_color="@color/brown"
+                    app:civ_border_width="4dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/my_plant_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Scientific Name:"
-                        android:textSize="20sp" />
+                        android:layout_marginTop="20dp"
+                        android:text="PlantiName"
+                        android:textColor="#000"
+                        android:textSize="21sp"
+                        android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/scientific_name"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="Chlorophytum comosum"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#FFFF">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scientific Name:"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/scientific_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chlorophytum comosum"
+                            android:textColor="@color/brown"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-        <LinearLayout
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="25dp">
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:text="Details"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_baseline_info_24" />
-
-                <TextView
-                    android:id="@+id/wiki_link"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="Learn More"
-                    android:onClick="getUrlFromIntent"
-                    />
-            </LinearLayout>
-            <!-- Line to separate items -->
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="#2E8B57"
+                android:layout_height="2dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/brown"
                 android:focusable="false" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:paddingLeft="25dp">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_baseline_spa_24" />
-
-                <TextView
-                    android:id="@+id/plant_description"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="Chlorophytum comosum, often called spider plant but also known as airplane plant, St. Bernard's lily, spider ivy, ribbon plant, and hen and chickens is a species of perennial flowering plant. It is native to tropical and southern Africa, but has become naturalized in other parts of the world, including western Australia. Chlorophytum comosum is easy to grow as a houseplant; variegated forms are the most popular."
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_baseline_info_24" />
+
+                    <TextView
+                        android:id="@+id/wiki_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="20dp"
+                        android:text="Learn More"
+                        android:onClick="getUrlFromIntent"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/ic_baseline_spa_24" />
+
+                    <TextView
+                        android:id="@+id/plant_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="20dp"
+                        android:text="Chlorophytum comosum, often called spider plant but also known as airplane plant, St. Bernard's lily, spider ivy, ribbon plant, and hen and chickens is a species of perennial flowering plant. It is native to tropical and southern Africa, but has become naturalized in other parts of the world, including western Australia. Chlorophytum comosum is easy to grow as a houseplant; variegated forms are the most popular."
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/remindersLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <!-- Line to separate items -->
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="#2E8B57"
-                android:focusable="false" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Reminders"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/brown"
+                    android:focusable="false" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/plantis_reminders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
-
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

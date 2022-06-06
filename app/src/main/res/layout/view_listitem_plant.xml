@@ -7,7 +7,9 @@
     android:orientation="horizontal"
     android:padding="5dp"
     android:background="@drawable/shadow_layout"
-    android:layout_margin="10dp">
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/plant_image"
@@ -15,7 +17,8 @@
         android:layout_height="60dp"
         android:layout_weight="1"
         android:src="@mipmap/ic_plantis"
-        app:civ_border_width="1dp" />
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/brown"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -28,7 +31,7 @@
             android:id="@+id/plant_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/metallicGreen"
             android:textStyle="bold"
             android:text="Placeholder"/>
 

@@ -1,17 +1,23 @@
 package ar.utn.frba.mobile.plantis.fragments
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.GardenAdapter
 import ar.utn.frba.mobile.plantis.PlantDetail
 import ar.utn.frba.mobile.plantis.R
+import ar.utn.frba.mobile.plantis.Reminder
 import ar.utn.frba.mobile.plantis.databinding.MyGardenFragmentBinding
+import java.time.DayOfWeek
+import java.time.LocalTime
 
+@RequiresApi(Build.VERSION_CODES.O) // TODO: ver como sacar esto
 class MyGardenFragment : Fragment() {
     lateinit var binding: MyGardenFragmentBinding
     lateinit var recyclerView: RecyclerView
@@ -32,7 +38,14 @@ class MyGardenFragment : Fragment() {
                     The plant has gained the Royal Horticultural Society's Award of Garden Merit.
                 """.trimIndent(),
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Epipremnum_aureum_31082012.jpg/320px-Epipremnum_aureum_31082012.jpg",
-                "https://en.wikipedia.org/wiki/Epipremnum_aureum"),
+                "https://en.wikipedia.org/wiki/Epipremnum_aureum",
+                listOf(
+                    Reminder("Water", LocalTime.of(17, 0), listOf(DayOfWeek.MONDAY, DayOfWeek.THURSDAY)),
+                    Reminder("Renew Ground", LocalTime.of(11, 0), listOf(DayOfWeek.SUNDAY)),
+                    Reminder("Fertilize", LocalTime.of(8, 30), listOf(DayOfWeek.TUESDAY)),
+                    Reminder("Check", LocalTime.of(7, 0), listOf(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY))
+                )
+            ),
             PlantDetail("Succulent", "Astroloba tenax",
                 "Astroloba tenax is a succulent plant of the genus Astroloba, indigenous to the Western Cape Province, South Africa.",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Astroloba_tenax_6.jpg/304px-Astroloba_tenax_6.jpg",

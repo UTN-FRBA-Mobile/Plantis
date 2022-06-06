@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2e7d32</color>
-    <color name="colorPrimaryDark">#005005</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="lightgray">#D8DEE9</color>
-    <color name="navigationIcon">#ECEFF4</color>
-    <color name="startgreen">#DCEDC1</color>
-    <color name="endbgreen">#91B493</color>
-    <color name="graylight">#fafafa</color>
+    <color name="metallicGreen">#436904</color>
+    <color name="green">#74A730</color>
+    <color name="oliveGreen">#BCD5A0</color>
+    <color name="eggshellWhite">#EBEDCF</color>
+    <color name="lightBrown">#EDE7E5</color>
+    <color name="brown">#C1744B</color>
+    <color name="lightGray">#F5F5F5</color>
 </resources>
