@@ -17,8 +17,6 @@ import ar.utn.frba.mobile.plantis.PlantDetail
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.Reminder
 import ar.utn.frba.mobile.plantis.databinding.FragmentMyGardenBinding
-import ar.utn.frba.mobile.plantis.databinding.FragmentSearchBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.DayOfWeek
 import java.time.LocalTime
 
@@ -108,10 +106,12 @@ class MyGardenFragment : Fragment() {
             adapter = viewAdapter
         }
 
-        binding.addButton.setOnClickListener {
-            val action = R.id.action_myGardenFragment_to_searchFragment
-            val bundle = bundleOf("wantsToAddPlant" to true)
-            findNavController().navigate(action, bundle)
-        }
+        binding.addButton.setOnClickListener { goToSearch() }
+    }
+
+    private fun goToSearch() {
+        val action = R.id.action_myGardenFragment_to_searchFragment
+        val bundle = bundleOf("wantsToAddPlant" to true)
+        findNavController().navigate(action, bundle)
     }
 }

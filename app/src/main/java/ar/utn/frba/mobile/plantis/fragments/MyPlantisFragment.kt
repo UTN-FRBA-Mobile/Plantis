@@ -37,10 +37,8 @@ class MyPlantisFragment : Fragment() {
 
         val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")!!
         val plantDetails = arguments?.getSerializable("details") as PlantDetail
-        binding.myPlantName.text = plantDetails.name
-        binding.plantDescription.text = plantDetails.description
-        binding.scientificName.text = plantDetails.scientificName
-        Glide.with(_context).load(plantDetails.imageUrl).into(binding.plantImage)
+
+        setUpPlantInfo(plantDetails)
 
         if (plantDetails.reminders.isEmpty())
             binding.remindersLayout.visibility = View.GONE
@@ -56,21 +54,35 @@ class MyPlantisFragment : Fragment() {
             adapter = viewAdapter
         }
 
-        binding.addButton.setOnClickListener {
-            val builder = activity.let { AlertDialog.Builder(it) }
-            val alert = builder.apply {
-                setTitle("Add Plant")
-                setMessage("Do you want to add this plant to your Garden?")
-                setPositiveButton("OK") { dialog, _ ->
-                    dialog.dismiss()
-                    val action = R.id.action_myPlantisFragment_to_myGardenFragment
-                    val bundle = bundleOf()
-                    Navigation.findNavController(view).navigate(action, bundle)
-                }
-                setNegativeButton("CANCEL") { dialog, _ -> dialog.dismiss() }
-                create()
+        binding.addButton.setOnClickListener { openAddPlantDialog(view) }
+    }
+
+    private fun setUpPlantInfo(plantDetails: PlantDetail) {
+        binding.myPlantName.text = plantDetails.name
+        binding.plantDescription.text = plantDetails.description
+        binding.scientificName.text = plantDetails.scientificName
+        Glide.with(_context).load(plantDetails.imageUrl).into(binding.plantImage)
+    }
+
+    private fun openAddPlantDialog(view: View) {
+        val builder = activity.let { AlertDialog.Builder(it) }
+        val alert = builder.apply {
+            setTitle("Add Plant")
+            setMessage("Do you want to add this plant to your Garden?")
+            setPositiveButton("OK") { dialog, _ ->
+                // TODO: cuando tengamos la persistencia aca habria que guardar la planta en el storage
+                toMyGarden(dialog, view)
             }
-            alert.show()
+            setNegativeButton("CANCEL") { dialog, _ -> dialog.dismiss() }
+            create()
         }
+        alert.show()
+    }
+
+    private fun toMyGarden(dialog: DialogInterface, view: View) {
+        dialog.dismiss()
+        val action = R.id.action_myPlantisFragment_to_myGardenFragment
+        val bundle = bundleOf()
+        Navigation.findNavController(view).navigate(action, bundle)
     }
 }

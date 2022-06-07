@@ -1,5 +1,6 @@
 package ar.utn.frba.mobile.plantis.fragments
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.StrictMode
 import android.view.LayoutInflater
@@ -27,20 +28,20 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val cameraHandler = CameraHandler(binding.searchImageView, binding.nextButton , ::registerForActivityResult)
-        val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
 
         binding.searchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }
+        binding.nextButton.setOnClickListener { goToSearchResults(cameraHandler.lastImageBitmap) }
+    }
 
-        binding.nextButton.setOnClickListener {
-            val suggestions = PlantIdMock(this.requireContext()).identifyPlantFromImage(cameraHandler.lastImageBitmap)
+    private fun goToSearchResults(lastImage: Bitmap) {
+        val suggestions = PlantIdMock(this.requireContext()).identifyPlantFromImage(lastImage)
+        val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
 
-            val bundle = bundleOf(
-                "suggestions" to suggestions.toTypedArray(),
-                "wantsToAddPlant" to wantsToAddPlant
-            )
-
-            val action = R.id.action_fragment_search_to_fragment_search_results
-            findNavController().navigate(action, bundle)
-        }
+        val bundle = bundleOf(
+            "suggestions" to suggestions.toTypedArray(),
+            "wantsToAddPlant" to wantsToAddPlant
+        )
+        val action = R.id.action_fragment_search_to_fragment_search_results
+        findNavController().navigate(action, bundle)
     }
 }
