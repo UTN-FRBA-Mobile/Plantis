@@ -8,7 +8,6 @@ import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ar.utn.frba.mobile.plantis.databinding.MainActivityBinding
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: MainActivityBinding
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
 
     fun getUrlFromIntent(view: View) {
-        val link = "https://simple.wikipedia.org/wiki/Chlorophytum_comosum"
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Global.instance.data)))
     }
 }

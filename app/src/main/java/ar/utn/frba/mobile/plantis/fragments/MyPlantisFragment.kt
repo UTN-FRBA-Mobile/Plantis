@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.*
 import ar.utn.frba.mobile.plantis.databinding.FragmentMyPlantisBinding
 import com.bumptech.glide.Glide
-import java.time.DayOfWeek
-import java.time.LocalTime
 
 @RequiresApi(Build.VERSION_CODES.O) // TODO: ver como sacar esto
 class MyPlantisFragment : Fragment() {
@@ -35,6 +33,10 @@ class MyPlantisFragment : Fragment() {
         binding.myPlantName.text = plantDetails.name
         binding.plantDescription.text = plantDetails.description
         binding.scientificName.text = plantDetails.scientificName
+
+        val singleToneClass: Global = Global.instance
+        singleToneClass.data = plantDetails.wikiUrl
+
         Glide.with(_context).load(plantDetails.imageUrl).into(binding.plantImage)
 
         if (plantDetails.reminders.isEmpty()) {
@@ -50,4 +52,5 @@ class MyPlantisFragment : Fragment() {
             adapter = viewAdapter
         }
     }
+
 }
