@@ -9,10 +9,13 @@
         android:id="@+id/myGardenFragment"
         android:name="ar.utn.frba.mobile.plantis.fragments.MyGardenFragment"
         android:label="fragment_my_garden"
-        tools:layout="@layout/my_garden_fragment" >
+        tools:layout="@layout/fragment_my_garden" >
         <action
             android:id="@+id/action_myGardenFragment_to_myPlantisFragment"
             app:destination="@id/myPlantisFragment" />
+        <action
+            android:id="@+id/action_myGardenFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
@@ -45,7 +48,11 @@
         android:id="@+id/myPlantisFragment"
         android:name="ar.utn.frba.mobile.plantis.fragments.MyPlantisFragment"
         android:label="fragment_my_plantis"
-        tools:layout="@layout/fragment_my_plantis" />
+        tools:layout="@layout/fragment_my_plantis" >
+        <action
+            android:id="@+id/action_myPlantisFragment_to_myGardenFragment"
+            app:destination="@id/myGardenFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_search_results"

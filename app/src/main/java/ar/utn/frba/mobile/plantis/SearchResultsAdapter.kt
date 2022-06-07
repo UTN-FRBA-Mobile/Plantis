@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.client.Suggestion
 import com.bumptech.glide.Glide
 
-class SearchResultsAdapter(val view: View, private val suggestions: List<Suggestion>) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
+class SearchResultsAdapter(
+    val view: View, private val suggestions: List<Suggestion>, val wantsToAddPlant: Boolean
+) : RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>() {
 
     class SearchResultsViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.title)
@@ -38,7 +40,10 @@ class SearchResultsAdapter(val view: View, private val suggestions: List<Suggest
 
         holder.infoButton.setOnClickListener {
             val action = R.id.action_fragment_search_results_to_myPlantisFragment
-            val bundle = bundleOf("details" to mapSuggestionToPlantDetail(suggestion))
+            val bundle = bundleOf(
+                "details" to mapSuggestionToPlantDetail(suggestion),
+                "wantsToAddPlant" to wantsToAddPlant
+            )
             findNavController(view).navigate(action, bundle)
         }
     }
