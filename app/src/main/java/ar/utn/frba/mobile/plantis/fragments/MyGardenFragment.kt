@@ -2,29 +2,34 @@ package ar.utn.frba.mobile.plantis.fragments
 
 import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.GardenAdapter
 import ar.utn.frba.mobile.plantis.PlantDetail
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.Reminder
-import ar.utn.frba.mobile.plantis.databinding.MyGardenFragmentBinding
+import ar.utn.frba.mobile.plantis.databinding.FragmentMyGardenBinding
+import ar.utn.frba.mobile.plantis.databinding.FragmentSearchBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.time.DayOfWeek
 import java.time.LocalTime
 
 @RequiresApi(Build.VERSION_CODES.O) // TODO: ver como sacar esto
 class MyGardenFragment : Fragment() {
-    lateinit var binding: MyGardenFragmentBinding
+    lateinit var binding: FragmentMyGardenBinding
     lateinit var recyclerView: RecyclerView
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = MyGardenFragmentBinding.inflate(layoutInflater)
-        return inflater.inflate(R.layout.my_garden_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentMyGardenBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,9 +103,15 @@ class MyGardenFragment : Fragment() {
         val viewManager = LinearLayoutManager(this.context)
         val viewAdapter = GardenAdapter(view, plantList)
 
-        recyclerView = view.findViewById<RecyclerView>(R.id.my_recycler_view).apply{
+        recyclerView = binding.myRecyclerView.apply {
             layoutManager = viewManager
             adapter = viewAdapter
+        }
+
+        binding.addButton.setOnClickListener {
+            val action = R.id.action_myGardenFragment_to_searchFragment
+            val bundle = bundleOf("wantsToAddPlant" to true)
+            findNavController().navigate(action, bundle)
         }
     }
 }

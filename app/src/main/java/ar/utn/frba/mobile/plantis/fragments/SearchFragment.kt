@@ -27,14 +27,20 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val cameraHandler = CameraHandler(binding.searchImageView, binding.nextButton , ::registerForActivityResult)
+        val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
 
         binding.searchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }
+
         binding.nextButton.setOnClickListener {
             val suggestions = PlantIdMock(this.requireContext()).identifyPlantFromImage(cameraHandler.lastImageBitmap)
-            val bundle = bundleOf("suggestions" to suggestions.toTypedArray())
+
+            val bundle = bundleOf(
+                "suggestions" to suggestions.toTypedArray(),
+                "wantsToAddPlant" to wantsToAddPlant
+            )
 
             val action = R.id.action_fragment_search_to_fragment_search_results
-            findNavController().navigate(action,bundle)
+            findNavController().navigate(action, bundle)
         }
     }
 }
