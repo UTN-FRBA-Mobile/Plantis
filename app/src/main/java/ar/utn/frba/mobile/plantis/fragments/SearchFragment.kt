@@ -1,5 +1,6 @@
 package ar.utn.frba.mobile.plantis.fragments
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.StrictMode
 import android.view.LayoutInflater
@@ -29,12 +30,18 @@ class SearchFragment : Fragment() {
         val cameraHandler = CameraHandler(binding.searchImageView, binding.nextButton , ::registerForActivityResult)
 
         binding.searchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }
-        binding.nextButton.setOnClickListener {
-            val suggestions = PlantIdMock(this.requireContext()).identifyPlantFromImage(cameraHandler.lastImageBitmap)
-            val bundle = bundleOf("suggestions" to suggestions.toTypedArray())
+        binding.nextButton.setOnClickListener { goToSearchResults(cameraHandler.lastImageBitmap) }
+    }
 
-            val action = R.id.action_fragment_search_to_fragment_search_results
-            findNavController().navigate(action,bundle)
-        }
+    private fun goToSearchResults(lastImage: Bitmap) {
+        val suggestions = PlantIdMock(this.requireContext()).identifyPlantFromImage(lastImage)
+        val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
+
+        val bundle = bundleOf(
+            "suggestions" to suggestions.toTypedArray(),
+            "wantsToAddPlant" to wantsToAddPlant
+        )
+        val action = R.id.action_fragment_search_to_fragment_search_results
+        findNavController().navigate(action, bundle)
     }
 }

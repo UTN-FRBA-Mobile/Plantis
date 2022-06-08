@@ -25,8 +25,9 @@ class SearchResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val suggestions = arguments?.getParcelableArray("suggestions")?.toList()?.filterIsInstance<Suggestion>()
+        val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
         val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = SearchResultsAdapter(view, suggestions!!)
+        val viewAdapter = SearchResultsAdapter(view, suggestions!!, wantsToAddPlant!!)
 
         recyclerView = view.findViewById<RecyclerView>(R.id.search_recycler_view).apply{
             layoutManager = viewManager

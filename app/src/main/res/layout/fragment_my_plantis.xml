@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragments.MyPlantisFragment"
     android:layout_width="match_parent"
@@ -193,4 +193,15 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:backgroundTint="@color/brown"
+        android:text="Add to my garden"
+        android:visibility="gone"
+        android:layout_margin="20dp"/>
+
+</FrameLayout>
