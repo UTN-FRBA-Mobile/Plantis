@@ -12,10 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ar.utn.frba.mobile.plantis.GardenAdapter
-import ar.utn.frba.mobile.plantis.PlantDetail
-import ar.utn.frba.mobile.plantis.R
-import ar.utn.frba.mobile.plantis.Reminder
+import ar.utn.frba.mobile.plantis.*
 import ar.utn.frba.mobile.plantis.databinding.FragmentMyGardenBinding
 import java.time.DayOfWeek
 import java.time.LocalTime
@@ -33,7 +30,7 @@ class MyGardenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val plantList = listOf(
+        val plantList = mutableListOf(
             PlantDetail("Pothos", "Epipremnum aureum",
                 """
                     Epipremnum aureum is a species in the arum family Araceae, native to Mo'orea in the Society Islands of French Polynesia. The species is a popular houseplant in temperate regions but has also become naturalised in tropical and sub-tropical forests worldwide, including northern South Africa, Australia, Southeast Asia, South Asia, the Pacific Islands and the West Indies, where it has caused severe ecological damage in some cases.
@@ -97,6 +94,9 @@ class MyGardenFragment : Fragment() {
                 "https://upload.wikimedia.org/wikipedia/commons/4/4f/Thymus_vulgaris1.JPG",
                 "https://en.wikipedia.org/wiki/Thymus_vulgaris")
         )
+
+        val storagePlants = PlantisStorage.getPlants(requireActivity()).plantis
+        plantList.addAll(storagePlants)
 
         val viewManager = LinearLayoutManager(this.context)
         val viewAdapter = GardenAdapter(view, plantList)
