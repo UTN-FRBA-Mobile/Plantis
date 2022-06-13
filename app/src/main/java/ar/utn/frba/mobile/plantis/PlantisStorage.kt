@@ -2,45 +2,33 @@ package ar.utn.frba.mobile.plantis
 
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import com.fasterxml.jackson.databind.ObjectMapper
-import java.io.Serializable
-import java.lang.Exception
 
 object PlantisStorage {
     private const val mode = Context.MODE_PRIVATE
+    private const val defaultPlantisPreferences = "{\"plants\":[]}"
+    private const val preferencesName = "plantis"
 
     fun addPlant(activity: Activity, plant: PlantDetail) {
-        val sharedPreferences = activity.getPreferences(mode)
-        val plantListAsJson = sharedPreferences.getString("plantis", """
-            {
-                "plantis": []
-            }
-        """.trimIndent())
-        val plantList = ObjectMapper().readValue(plantListAsJson, PlantisDto::class.java)
-        plantList.plantis.add(plant)
-        val newPlantJson = ObjectMapper().writeValueAsString(plantList)
+        val (sharedPreferences, plantis) = getPlantis(activity)
+        plantis.plants.add(plant)
+        writePlantisInStorage(plantis, sharedPreferences)
+    }
 
-        with (sharedPreferences.edit()) {
-            putString("plantis", newPlantJson)
+    fun getPlantis(activity: Activity): Pair<SharedPreferences, Plantis> {
+        val sharedPreferences = activity.getPreferences(mode)
+        val plantisJson = sharedPreferences.getString(preferencesName, defaultPlantisPreferences)
+        val plantis = ObjectMapper().readValue(plantisJson, Plantis::class.java)
+
+        return Pair(sharedPreferences, plantis)
+    }
+
+    private fun writePlantisInStorage(plantis: Plantis, sharedPreferences: SharedPreferences) {
+        val plantisJson = ObjectMapper().writeValueAsString(plantis)
+        with(sharedPreferences.edit()) {
+            putString("plantis", plantisJson)
             apply()
         }
     }
-
-    fun getPlants(activity: Activity): PlantisDto {
-        try {
-            val sharedPreferences = activity.getPreferences(mode)
-            val plantListAsJson = sharedPreferences.getString("plantis", """
-            {
-                "plantis": []
-            }
-        """.trimIndent())
-            val plantList = ObjectMapper().readValue(plantListAsJson, PlantisDto::class.java)
-            return plantList
-        } catch (e: Exception) {
-            throw e
-        }
-
-    }
 }
-
-data class PlantisDto(val plantis: MutableList<PlantDetail> = mutableListOf())

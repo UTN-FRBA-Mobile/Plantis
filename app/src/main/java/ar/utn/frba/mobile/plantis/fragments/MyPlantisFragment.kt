@@ -45,7 +45,6 @@ class MyPlantisFragment : Fragment() {
 
         Glide.with(_context).load(plantDetails.imageUrl).into(binding.plantImage)
 
-
         setUpPlantInfo(plantDetails)
 
         if (plantDetails.reminders.isEmpty())
@@ -93,5 +92,4 @@ class MyPlantisFragment : Fragment() {
         val bundle = bundleOf()
         Navigation.findNavController(view).navigate(action, bundle)
     }
-
 }

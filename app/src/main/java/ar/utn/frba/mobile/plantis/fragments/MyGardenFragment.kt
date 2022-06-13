@@ -2,7 +2,6 @@ package ar.utn.frba.mobile.plantis.fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.os.StrictMode
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -95,7 +94,7 @@ class MyGardenFragment : Fragment() {
                 "https://en.wikipedia.org/wiki/Thymus_vulgaris")
         )
 
-        val storagePlants = PlantisStorage.getPlants(requireActivity()).plantis
+        val storagePlants = PlantisStorage.getPlantis(requireActivity()).second.plants
         plantList.addAll(storagePlants)
 
         val viewManager = LinearLayoutManager(this.context)
