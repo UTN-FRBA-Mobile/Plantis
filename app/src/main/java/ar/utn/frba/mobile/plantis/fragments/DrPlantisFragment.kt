@@ -2,6 +2,7 @@ package ar.utn.frba.mobile.plantis.fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import ar.utn.frba.mobile.plantis.CameraHandler
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.client.PlantIdMock
 import ar.utn.frba.mobile.plantis.client.healthAssesment.HealthAssessment
+import ar.utn.frba.mobile.plantis.client.healthAssesment.PlantIdHealth
 import ar.utn.frba.mobile.plantis.client.healthAssesment.PlantIdHealthMock
 import ar.utn.frba.mobile.plantis.databinding.FragmentDrPlantisBinding
 
@@ -20,6 +22,8 @@ class DrPlantisFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDrPlantisBinding.inflate(inflater, container, false)
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
         return binding.root
     }
 
@@ -34,7 +38,7 @@ class DrPlantisFragment : Fragment() {
         }
     }
     private fun goToHealthResults(lastImage: Bitmap) {
-        val healthAssessment = PlantIdHealthMock(this.requireContext()).makeHealthAssesmentFromImage(lastImage)
+        val healthAssessment = PlantIdHealth(this.requireContext()).makeHealthAssesmentFromImage(lastImage)
         println(healthAssessment)
     }
 }
