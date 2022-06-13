@@ -45,7 +45,6 @@ class MyPlantisFragment : Fragment() {
 
         Glide.with(_context).load(plantDetails.imageUrl).into(binding.plantImage)
 
-
         setUpPlantInfo(plantDetails)
 
         if (plantDetails.reminders.isEmpty())
@@ -62,7 +61,7 @@ class MyPlantisFragment : Fragment() {
             adapter = viewAdapter
         }
 
-        binding.addButton.setOnClickListener { openAddPlantDialog(view) }
+        binding.addButton.setOnClickListener { openAddPlantDialog(view, plantDetails) }
     }
 
     private fun setUpPlantInfo(plantDetails: PlantDetail) {
@@ -72,13 +71,13 @@ class MyPlantisFragment : Fragment() {
         Glide.with(_context).load(plantDetails.imageUrl).into(binding.plantImage)
     }
 
-    private fun openAddPlantDialog(view: View) {
+    private fun openAddPlantDialog(view: View, plantDetails: PlantDetail) {
         val builder = activity.let { AlertDialog.Builder(it) }
         val alert = builder.apply {
             setTitle("Add Plant")
             setMessage("Do you want to add this plant to your Garden?")
             setPositiveButton("OK") { dialog, _ ->
-                // TODO: cuando tengamos la persistencia aca habria que guardar la planta en el storage
+                PlantisStorage.addPlant(requireActivity(), plantDetails)
                 toMyGarden(dialog, view)
             }
             setNegativeButton("CANCEL") { dialog, _ -> dialog.dismiss() }
@@ -93,5 +92,4 @@ class MyPlantisFragment : Fragment() {
         val bundle = bundleOf()
         Navigation.findNavController(view).navigate(action, bundle)
     }
-
 }
