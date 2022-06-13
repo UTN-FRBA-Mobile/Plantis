@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ar.utn.frba.mobile.plantis.CameraHandler
 import ar.utn.frba.mobile.plantis.R
-import ar.utn.frba.mobile.plantis.client.PlantIdMock
-import ar.utn.frba.mobile.plantis.client.healthAssesment.HealthAssessment
 import ar.utn.frba.mobile.plantis.client.healthAssesment.PlantIdHealth
 import ar.utn.frba.mobile.plantis.client.healthAssesment.PlantIdHealthMock
 import ar.utn.frba.mobile.plantis.databinding.FragmentDrPlantisBinding
@@ -33,12 +31,13 @@ class DrPlantisFragment : Fragment() {
 
         binding.drplantisSearchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }
         binding.drplantisNextButton.setOnClickListener {
-            val action = R.id.action_fragment_search_to_fragment_search_results
             goToHealthResults(cameraHandler.lastImageBitmap)
         }
     }
     private fun goToHealthResults(lastImage: Bitmap) {
+        val action = R.id.action_drPlantisFragment_to_drPlantisSearchResultsFragment
         val healthAssessment = PlantIdHealth(this.requireContext()).makeHealthAssesmentFromImage(lastImage)
-        println(healthAssessment)
+        val bundle = bundleOf("healthAssessment" to healthAssessment)
+        findNavController().navigate(action, bundle)
     }
 }

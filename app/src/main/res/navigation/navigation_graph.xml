@@ -72,5 +72,10 @@
         android:id="@+id/drPlantisSearchResultsFragment"
         android:name="ar.utn.frba.mobile.plantis.fragments.DrPlantisSearchResultsFragment"
         android:label="fragment_dr_plantis_search_results"
-        tools:layout="@layout/fragment_dr_plantis_search_results" />
+        tools:layout="@layout/fragment_dr_plantis_search_results" >
+        <argument
+            android:name="healthAssessment"
+            app:argType="ar.utn.frba.mobile.plantis.client.healthAssesment.HealthAssessment"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>
