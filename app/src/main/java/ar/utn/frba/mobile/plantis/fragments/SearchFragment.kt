@@ -34,7 +34,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun goToSearchResults(lastImage: Bitmap) {
-        val suggestions = PlantIdMock(this.requireContext()).identifyPlantFromImage(lastImage)
+        val suggestions = PlantId(this.requireContext()).identifyPlantFromImage(lastImage)
         val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
 
         val bundle = bundleOf(

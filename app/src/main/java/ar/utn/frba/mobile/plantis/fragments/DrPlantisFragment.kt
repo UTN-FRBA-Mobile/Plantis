@@ -36,7 +36,7 @@ class DrPlantisFragment : Fragment() {
     }
     private fun goToHealthResults(lastImage: Bitmap) {
         val action = R.id.action_drPlantisFragment_to_drPlantisSearchResultsFragment
-        val healthAssessment = PlantIdHealthMock(this.requireContext()).makeHealthAssesmentFromImage(lastImage)
+        val healthAssessment = PlantIdHealth(this.requireContext()).makeHealthAssesmentFromImage(lastImage)
         val bundle = bundleOf("healthAssessment" to healthAssessment)
         findNavController().navigate(action, bundle)
     }
