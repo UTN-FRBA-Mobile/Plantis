@@ -17,11 +17,11 @@ data class HealthAssessmentResponse(
 @Parcelize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class HealthAssessment(
-    @JsonProperty("health_assessment")
+    @JsonProperty("is_healthy_probability")
     val isHealthyProbability: Double?,
-    @JsonProperty("health_assessment")
+    @JsonProperty("is_healthy")
     val isHealthy: Boolean?,
-    @JsonProperty("health_assessment")
+    @JsonProperty("diseases")
     val diseases: List<Disease>?
 ): Parcelable
 
