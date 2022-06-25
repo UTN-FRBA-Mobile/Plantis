@@ -62,6 +62,19 @@ class MyPlantisFragment : Fragment() {
         }
 
         binding.addButton.setOnClickListener { openAddPlantDialog(view, plantDetails) }
+
+        binding.addReminderButton.setOnClickListener{ goToDayTimePicker()}
+
+    }
+
+    private fun goToDayTimePicker() {
+        val builder = activity.let { AlertDialog.Builder(it) }
+        val alert = builder.apply {
+            setTitle("Holi")
+            setNegativeButton("CANCEL") { dialog, _ -> dialog.dismiss() }
+            create()
+        }
+        alert.show()
     }
 
     private fun setUpPlantInfo(plantDetails: PlantDetail) {
