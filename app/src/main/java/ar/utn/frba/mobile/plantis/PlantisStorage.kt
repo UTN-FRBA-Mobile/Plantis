@@ -16,6 +16,12 @@ object PlantisStorage {
         writePlantisInStorage(plantis, sharedPreferences)
     }
 
+    fun addReminder(activity: Activity, reminder: Reminder, plantName: String){
+        val (sharedPreferences, plantis) = getPlantis(activity)
+        plantis.plants.find { it.name == plantName }?.reminders?.add(reminder)
+        writePlantisInStorage(plantis, sharedPreferences)
+    }
+
     fun getPlantis(activity: Activity): Pair<SharedPreferences, Plantis> {
         val sharedPreferences = activity.getPreferences(mode)
         val plantisJson = sharedPreferences.getString(preferencesName, defaultPlantisPreferences)

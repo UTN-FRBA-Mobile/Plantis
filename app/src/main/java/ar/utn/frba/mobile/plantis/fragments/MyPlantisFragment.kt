@@ -23,6 +23,7 @@ class MyPlantisFragment : Fragment() {
     lateinit var binding: FragmentMyPlantisBinding
     lateinit var _context: Context
     lateinit var recyclerView: RecyclerView
+    lateinit var plantDetails: PlantDetail
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMyPlantisBinding.inflate(inflater, container, false)
@@ -34,7 +35,7 @@ class MyPlantisFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")!!
-        val plantDetails = arguments?.getSerializable("details") as PlantDetail
+        plantDetails = arguments?.getSerializable("details") as PlantDetail
 
         binding.myPlantName.text = plantDetails.name
         binding.plantDescription.text = plantDetails.description
@@ -63,18 +64,8 @@ class MyPlantisFragment : Fragment() {
 
         binding.addButton.setOnClickListener { openAddPlantDialog(view, plantDetails) }
 
-        binding.addReminderButton.setOnClickListener{ goToDayTimePicker()}
+        binding.addReminderButton.setOnClickListener{ toNewReminder(view)}
 
-    }
-
-    private fun goToDayTimePicker() {
-        val builder = activity.let { AlertDialog.Builder(it) }
-        val alert = builder.apply {
-            setTitle("Holi")
-            setNegativeButton("CANCEL") { dialog, _ -> dialog.dismiss() }
-            create()
-        }
-        alert.show()
     }
 
     private fun setUpPlantInfo(plantDetails: PlantDetail) {
@@ -103,6 +94,14 @@ class MyPlantisFragment : Fragment() {
         dialog.dismiss()
         val action = R.id.action_myPlantisFragment_to_myGardenFragment
         val bundle = bundleOf()
+        Navigation.findNavController(view).navigate(action, bundle)
+    }
+
+
+    private fun toNewReminder(view: View) {
+        var plantName = plantDetails.name
+        val action = R.id.action_myPlantisFragment_to_newReminderFragment
+        val bundle = bundleOf("plantName" to plantName )
         Navigation.findNavController(view).navigate(action, bundle)
     }
 }

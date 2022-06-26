@@ -7,4 +7,6 @@
     <color name="lightBrown">#EDE7E5</color>
     <color name="brown">#C1744B</color>
     <color name="lightGray">#F5F5F5</color>
+    <color name="darkGray">#7E7E7E</color>
+    <color name="black">#000</color>
 </resources>

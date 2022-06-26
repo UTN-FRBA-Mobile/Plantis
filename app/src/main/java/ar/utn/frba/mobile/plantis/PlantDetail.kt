@@ -8,5 +8,5 @@ data class PlantDetail(
     val description: String? = null,
     val imageUrl: String? = null,
     val wikiUrl: String? = null,
-    val reminders: List<Reminder> = emptyList()
+    val reminders: MutableList<Reminder> = mutableListOf()
 ): Serializable

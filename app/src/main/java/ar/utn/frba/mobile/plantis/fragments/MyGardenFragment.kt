@@ -38,7 +38,7 @@ class MyGardenFragment : Fragment() {
                 """.trimIndent(),
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Epipremnum_aureum_31082012.jpg/320px-Epipremnum_aureum_31082012.jpg",
                 "https://en.wikipedia.org/wiki/Epipremnum_aureum",
-                listOf(
+                mutableListOf(
                     Reminder("Water", LocalTime.of(17, 0), listOf(DayOfWeek.MONDAY, DayOfWeek.THURSDAY)),
                     Reminder("Renew Ground", LocalTime.of(11, 0), listOf(DayOfWeek.SUNDAY)),
                     Reminder("Fertilize", LocalTime.of(8, 30), listOf(DayOfWeek.TUESDAY)),
