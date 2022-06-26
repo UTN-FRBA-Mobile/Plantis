@@ -28,7 +28,6 @@ import java.util.*
 class NewReminderFragment : Fragment() {
     lateinit var binding: FragmentNewReminderBinding
     lateinit var plantName: String
-    lateinit var selectedTime: LocalTime
     var hour = 0
     var minute = 0
 
@@ -64,7 +63,7 @@ class NewReminderFragment : Fragment() {
             DayOfWeek.SUNDAY to binding.daypickerSunday,
         )
         val newReminderDays = days.filter{ it.value.isChecked}.keys.toList()
-        val newRemindarTime = selectedTime
+        val newRemindarTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
         PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newRemindarTime, newReminderDays), plantName)
         Navigation.findNavController(view).popBackStack()
     }
@@ -75,7 +74,6 @@ class NewReminderFragment : Fragment() {
             OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
                 hour = selectedHour
                 minute = selectedMinute
-                selectedTime = LocalTime.of(hour,minute)
                 binding.newReminderTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
             }
 

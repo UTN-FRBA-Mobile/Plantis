@@ -37,6 +37,8 @@ class MyPlantisFragment : Fragment() {
         val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")!!
         plantDetails = arguments?.getSerializable("details") as PlantDetail
 
+        reloadReminders(plantDetails.reminders, plantDetails.name!!)
+
         binding.myPlantName.text = plantDetails.name
         binding.plantDescription.text = plantDetails.description
         binding.scientificName.text = plantDetails.scientificName
@@ -66,6 +68,11 @@ class MyPlantisFragment : Fragment() {
 
         binding.addReminderButton.setOnClickListener{ toNewReminder(view)}
 
+    }
+
+    private fun reloadReminders(reminders: MutableList<Reminder>, plantName: String ) {
+        reminders.clear()
+        reminders.addAll(PlantisStorage.getReminders(requireActivity(), plantName))
     }
 
     private fun setUpPlantInfo(plantDetails: PlantDetail) {
