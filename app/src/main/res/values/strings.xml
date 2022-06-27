@@ -9,4 +9,5 @@
     <string name="siguiente">Next</string>
     <string name="Probabibilidad">Probability: %1$s</string>
     <string name="imagen_de_la_planta">Imagen de la planta</string>
+    <string name="health_probability">Healthy probability: %1$s</string>
 </resources>
