@@ -31,7 +31,7 @@ object PlantisStorage {
     }
 
     fun getReminders(activity: Activity, plantName: String): MutableList<Reminder> {
-        val (sharedPreferences, plantis) = getPlantis(activity)
+        val (_, plantis) = getPlantis(activity)
 
         return plantis.plants.find { it.name == plantName }?.reminders ?: mutableListOf()
     }
