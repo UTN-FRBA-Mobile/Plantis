@@ -1,23 +1,16 @@
 package ar.utn.frba.mobile.plantis
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.fragments.ReminderAndPlant
 import com.bumptech.glide.Glide
-import com.google.android.material.switchmaterial.SwitchMaterial
-import org.w3c.dom.Text
 import java.time.DayOfWeek
 
-@RequiresApi(Build.VERSION_CODES.O)
 class AllRemindersAdapter(val view: View, val remindersList: List<Any>) : RecyclerView.Adapter<AllRemindersAdapter.RemindersViewHolder>() {
     private val DAY = 1
     private val REMINDER = 2

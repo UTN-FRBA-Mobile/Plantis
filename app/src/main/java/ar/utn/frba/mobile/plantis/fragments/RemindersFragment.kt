@@ -1,20 +1,16 @@
 package ar.utn.frba.mobile.plantis.fragments
 
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.core.util.toRange
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.*
 import ar.utn.frba.mobile.plantis.databinding.FragmentRemindersBinding
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.util.*
 
 class RemindersFragment : Fragment() {
     lateinit var binding: FragmentRemindersBinding
@@ -25,7 +21,6 @@ class RemindersFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,10 +32,7 @@ class RemindersFragment : Fragment() {
             }
         }
 
-        // TODO abstraer esta logica
         val days = getListOfDaysStartingWithToday()
-
-        // TODO ver que hacemos si no hay reminders un dia
         val reminders = days.flatMap { getDayReminders(it, allReminders) }
 
         val viewManager = LinearLayoutManager(this.context)
@@ -52,7 +44,6 @@ class RemindersFragment : Fragment() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun getListOfDaysStartingWithToday(): MutableList<DayOfWeek> {
         val days = mutableListOf<DayOfWeek>()
         val today = LocalDate.now().dayOfWeek

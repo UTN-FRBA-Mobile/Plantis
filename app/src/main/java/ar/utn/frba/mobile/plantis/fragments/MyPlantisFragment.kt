@@ -18,7 +18,6 @@ import ar.utn.frba.mobile.plantis.*
 import ar.utn.frba.mobile.plantis.databinding.FragmentMyPlantisBinding
 import com.bumptech.glide.Glide
 
-@RequiresApi(Build.VERSION_CODES.O) // TODO: ver como sacar esto
 class MyPlantisFragment : Fragment() {
     lateinit var binding: FragmentMyPlantisBinding
     lateinit var _context: Context
