@@ -44,7 +44,7 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
     override fun onBindViewHolder(holder: RemindersViewHolder, position: Int) {
         val reminder = remindersList[position]
         holder.name.text = reminder.name
-        holder.hour.text = reminder.hour.format(DateTimeFormatter.ofPattern("hh:mm"))
+        holder.hour.text = reminder.hour
 
         setFrequency(reminder, holder)
         holder.switch.setOnClickListener { changeReminderColor(holder) }
@@ -57,7 +57,7 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
             return
         }
 
-        reminder.frequency.forEach { dayOfWeek ->
+        reminder.frequency?.forEach { dayOfWeek ->
             val textView = holder.days[dayOfWeek]
             textView?.setTextColor(ContextCompat.getColor(holder.context, R.color.brown))
         }
