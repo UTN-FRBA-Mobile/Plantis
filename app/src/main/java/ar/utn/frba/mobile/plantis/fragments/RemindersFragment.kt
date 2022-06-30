@@ -38,40 +38,46 @@ class RemindersFragment : Fragment() {
         }
 
         // TODO abstraer esta logica
-        val today = LocalDate.now().dayOfWeek
+        val days = getListOfDaysStartingWithToday()
+
+        // TODO ver que hacemos si no hay reminders un dia
+        val reminders = days.flatMap { getDayReminders(it, allReminders) }
+
+        val viewManager = LinearLayoutManager(this.context)
+        val viewAdapter = AllRemindersAdapter(view, reminders)
+
+        recyclerView = binding.myRecyclerView.apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getListOfDaysStartingWithToday(): MutableList<DayOfWeek> {
         val days = mutableListOf<DayOfWeek>()
+        val today = LocalDate.now().dayOfWeek
         var j = today.value
         days.add(today)
         for (i in 1..6) {
             val day = DayOfWeek.of(j).plus(1)
             days.add(day)
-            if(j==7) j=1 else j++
+            if (j == 7) j = 1 else j++
         }
-
-        // TODO ver que hacemos si no hay reminders un dia
-        val reminders = days.map {
-            getDayReminders(it, allReminders)
-        }
-
-        val viewManager = LinearLayoutManager(this.context)
-        //val viewAdapter = AllRemindersAdapter(view, storageReminders)
-
-        /*recyclerView = binding.myRecyclerView.apply {
-            layoutManager = viewManager
-            adapter = viewAdapter
-        }*/
+        return days
     }
 
+    // TODO filter only active reminders
     private fun getDayReminders(day: DayOfWeek, allReminders: List<ReminderAndPlant>): List<Any> {
-        val dayReminders = mutableListOf<Any>()
-        dayReminders.add(day)
-        dayReminders.add(
-            allReminders
-                .filter { it.reminder.frequency!!.contains(day) }
-                .sortedBy { it.reminder.hour }
-        )
+        val dayReminders = mutableListOf<Any>(day)
+
+        val remindersFiltered = allReminders.filter { it.reminder.frequency!!.contains(day) }.sortedBy { it.reminder.hour }
+        if (remindersFiltered.isNullOrEmpty())
+            dayReminders.add(NoReminders())
+        else
+            remindersFiltered.forEach { dayReminders.add(it) }
         return dayReminders
     }
 }
 
 data class ReminderAndPlant(val reminder: Reminder, val plantName: String?, val plantImageUrl: String?)
+class NoReminders
