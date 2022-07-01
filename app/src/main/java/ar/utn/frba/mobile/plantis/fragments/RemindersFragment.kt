@@ -26,11 +26,14 @@ class RemindersFragment : Fragment() {
 
         val storagePlants = PlantisStorage.getPlantis(requireActivity()).second.plants
 
-        val allReminders = storagePlants.flatMap { plant ->
-            plant.reminders.map { reminder ->
-                ReminderAndPlant(reminder, plant.name, plant.imageUrl)
-            }
-        }
+        val allReminders =
+            storagePlants
+                .flatMap { plant ->
+                    plant.reminders.map { reminder ->
+                        ReminderAndPlant(reminder, plant.name, plant.imageUrl)
+                    }
+                }
+                .filter { it.reminder.isActive!! }
 
         val days = getListOfDaysStartingWithToday()
         val reminders = days.flatMap { getDayReminders(it, allReminders) }
