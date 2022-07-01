@@ -43,4 +43,14 @@ object PlantisStorage {
             apply()
         }
     }
+
+    fun updateReminders(activity: Activity, reminders: MutableList<Reminder>, plantName: String?) {
+        val (sharedPreferences, plantis) = getPlantis(activity)
+        val storageReminders = plantis.plants.find { it.name == plantName }?.reminders
+        storageReminders?.apply {
+            clear()
+            storageReminders.addAll(reminders)
+        }
+        writePlantisInStorage(plantis, sharedPreferences)
+    }
 }

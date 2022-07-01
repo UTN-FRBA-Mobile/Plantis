@@ -41,9 +41,11 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
         val reminder = remindersList[position]
         holder.name.text = reminder.name
         holder.hour.text = reminder.hour
+        holder.switch.isChecked = reminder.isActive!!
+        changeReminderColor(holder)
 
         setFrequency(reminder, holder)
-        holder.switch.setOnClickListener { changeReminderColor(holder) }
+        holder.switch.setOnClickListener { changeSwitchState(holder, reminder) }
     }
 
     private fun setFrequency(reminder: Reminder, holder: RemindersViewHolder) {
@@ -57,6 +59,11 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
             val textView = holder.days[dayOfWeek]
             textView?.setTextColor(ContextCompat.getColor(holder.context, R.color.brown))
         }
+    }
+
+    private fun changeSwitchState(holder: RemindersViewHolder, reminder: Reminder) {
+        changeReminderColor(holder)
+        reminder.isActive = holder.switch.isChecked
     }
 
     private fun changeReminderColor(holder: RemindersViewHolder) {

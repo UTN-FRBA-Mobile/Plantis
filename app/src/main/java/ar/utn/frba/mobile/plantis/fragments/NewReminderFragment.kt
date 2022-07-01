@@ -50,23 +50,20 @@ class NewReminderFragment : Fragment() {
             DayOfWeek.SATURDAY to binding.daypickerSaturdat,
             DayOfWeek.SUNDAY to binding.daypickerSunday,
         )
-        val newReminderDays = days.filter{ it.value.isChecked}.keys.toList()
+        val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
         val newRemindarTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-        PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newRemindarTime, newReminderDays), plantName)
+        PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newRemindarTime, newReminderDays, true), plantName)
         Navigation.findNavController(view).popBackStack()
     }
 
     fun goToTimePicker(view: View?) {
-        val onTimeSetListener =
-            OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-                hour = selectedHour
-                minute = selectedMinute
-                binding.newReminderTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
-            }
+        val onTimeSetListener = OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+            hour = selectedHour
+            minute = selectedMinute
+            binding.newReminderTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
+        }
 
-        // int style = AlertDialog.THEME_HOLO_DARK;
-        val timePickerDialog =
-            TimePickerDialog(this.context,  /*style,*/onTimeSetListener, hour, minute, true)
+        val timePickerDialog = TimePickerDialog(this.context,  onTimeSetListener, hour, minute, true)
         timePickerDialog.setTitle("Select Time")
         timePickerDialog.show()
     }
