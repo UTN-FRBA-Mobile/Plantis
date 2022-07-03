@@ -20,6 +20,7 @@ class DrPlantisSearchResultsFragment : Fragment() {
     lateinit var binding: FragmentDrPlantisSearchResultsBinding
     lateinit var _context: Context
     lateinit var recyclerView: RecyclerView
+    private val fullCircularProgress: Int = 50
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDrPlantisSearchResultsBinding.inflate(inflater, container, false)
@@ -31,13 +32,30 @@ class DrPlantisSearchResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val healthAssessment = arguments?.getParcelable<HealthAssessment>("healthAssessment")
-        binding.isHealthyProbText.text = _context.getString(R.string.health_probability,"%.2f".format(healthAssessment?.isHealthyProbability))
+//        binding.isHealthyProbText.text = _context.getString(R.string.health_probability,"%.2f".format(healthAssessment?.isHealthyProbability))
         val viewManager = LinearLayoutManager(this.context)
         val viewAdapter = DrPlantisResultsAdapter(view, healthAssessment!!)
+        val healthyProbabilitity = healthAssessment?.isHealthyProbability!!
+
+        binding.progressCircular.progress = getHealthLevel(healthyProbabilitity)
+
+        if(healthyProbabilitity >= 0.70){
+            binding.healthText.text = "Healthy"
+        }
+        if(healthyProbabilitity < 0.70){
+            binding.healthText.text = "Could be better"
+        }
+        if(healthyProbabilitity < 0.30){
+            binding.healthText.text = "Needs treatment"
+        }
 
         recyclerView = view.findViewById<RecyclerView>(R.id.dr_plantis_result_recycler_view).apply{
             layoutManager = viewManager
             adapter = viewAdapter
         }
     }
-}
+
+    private fun getHealthLevel(percentage: Double): Int {
+        return (fullCircularProgress * percentage).toInt()
+    }
+    }

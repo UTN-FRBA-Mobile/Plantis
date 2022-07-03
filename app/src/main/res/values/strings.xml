@@ -11,4 +11,5 @@
     <string name="imagen_de_la_planta">Imagen de la planta</string>
     <string name="health_probability">Healthy probability: %1$s</string>
     <string name="probable_diseases">Probable diseases</string>
+    <string name="treatments">treatments</string>
 </resources>
