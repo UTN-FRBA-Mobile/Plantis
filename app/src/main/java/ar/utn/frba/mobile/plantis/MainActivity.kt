@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), notificationListener {
     {
         val intent = Intent(applicationContext, Notification::class.java)
         val title = "Plantis"
-        val message = "Don't forget us"
+        val message = "It's time to water PLANTNAME!"
         intent.putExtra(titleExtra, title)
         intent.putExtra(messageExtra, message)
 
@@ -84,10 +84,10 @@ class MainActivity : AppCompatActivity(), notificationListener {
 
     private fun getTime(): Long
     {
-        val minute = 30
-        val hour = 11
-        val day = 16
-        val month = 6
+        val minute = 23
+        val hour = 10
+        val day = 4
+        val month = 6 //Starts in 0
         val year = 2022
 
         val calendar = Calendar.getInstance()
