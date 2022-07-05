@@ -1,20 +1,16 @@
 package ar.utn.frba.mobile.plantis
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import java.time.DayOfWeek
-import java.time.format.DateTimeFormatter
 
-@RequiresApi(Build.VERSION_CODES.O) // TODO: ver como sacar esto
 class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder>() {
 
     class RemindersViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
@@ -45,9 +41,11 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
         val reminder = remindersList[position]
         holder.name.text = reminder.name
         holder.hour.text = reminder.hour
+        holder.switch.isChecked = reminder.isActive!!
+        changeReminderColor(holder)
 
         setFrequency(reminder, holder)
-        holder.switch.setOnClickListener { changeReminderColor(holder) }
+        holder.switch.setOnClickListener { changeSwitchState(holder, reminder) }
     }
 
     private fun setFrequency(reminder: Reminder, holder: RemindersViewHolder) {
@@ -61,6 +59,11 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
             val textView = holder.days[dayOfWeek]
             textView?.setTextColor(ContextCompat.getColor(holder.context, R.color.brown))
         }
+    }
+
+    private fun changeSwitchState(holder: RemindersViewHolder, reminder: Reminder) {
+        changeReminderColor(holder)
+        reminder.isActive = holder.switch.isChecked
     }
 
     private fun changeReminderColor(holder: RemindersViewHolder) {

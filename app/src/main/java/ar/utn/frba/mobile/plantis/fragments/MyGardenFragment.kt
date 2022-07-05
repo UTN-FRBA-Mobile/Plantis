@@ -1,22 +1,17 @@
 package ar.utn.frba.mobile.plantis.fragments
 
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.*
 import ar.utn.frba.mobile.plantis.databinding.FragmentMyGardenBinding
-import java.time.DayOfWeek
-import java.time.LocalTime
 
-@RequiresApi(Build.VERSION_CODES.O) // TODO: ver como sacar esto
 class MyGardenFragment : Fragment() {
     lateinit var binding: FragmentMyGardenBinding
     lateinit var recyclerView: RecyclerView

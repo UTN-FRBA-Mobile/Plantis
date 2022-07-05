@@ -18,7 +18,6 @@ import ar.utn.frba.mobile.plantis.*
 import ar.utn.frba.mobile.plantis.databinding.FragmentMyPlantisBinding
 import com.bumptech.glide.Glide
 
-@RequiresApi(Build.VERSION_CODES.O) // TODO: ver como sacar esto
 class MyPlantisFragment : Fragment() {
     lateinit var binding: FragmentMyPlantisBinding
     lateinit var _context: Context
@@ -35,6 +34,7 @@ class MyPlantisFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")!!
+        val isMyPlant = arguments?.getBoolean("isMyPlant")!!
         plantDetails = arguments?.getSerializable("details") as PlantDetail
 
         reloadReminders(plantDetails.reminders, plantDetails.name!!)
@@ -50,8 +50,10 @@ class MyPlantisFragment : Fragment() {
 
         setUpPlantInfo(plantDetails)
 
-        if (plantDetails.reminders.isEmpty())
+        if (!isMyPlant) {
             binding.remindersLayout.visibility = View.GONE
+            binding.addReminderButton.visibility = View.GONE
+        }
 
         if (wantsToAddPlant)
             binding.addButton.visibility = View.VISIBLE
@@ -65,12 +67,20 @@ class MyPlantisFragment : Fragment() {
         }
 
         binding.addButton.setOnClickListener { openAddPlantDialog(view, plantDetails) }
-
-        binding.addReminderButton.setOnClickListener{ toNewReminder(view)}
-
+        binding.addReminderButton.setOnClickListener{ toNewReminder(view) }
     }
 
-    private fun reloadReminders(reminders: MutableList<Reminder>, plantName: String ) {
+    override fun onPause() {
+        super.onPause()
+        if (plantDetails.reminders.isNotEmpty())
+            persistReminders(plantDetails.reminders, plantDetails.name)
+    }
+
+    private fun persistReminders(reminders: MutableList<Reminder>, plantName: String?) {
+        PlantisStorage.updateReminders(requireActivity(), reminders, plantName)
+    }
+
+    private fun reloadReminders(reminders: MutableList<Reminder>, plantName: String) {
         reminders.clear()
         reminders.addAll(PlantisStorage.getReminders(requireActivity(), plantName))
     }
@@ -104,11 +114,10 @@ class MyPlantisFragment : Fragment() {
         Navigation.findNavController(view).navigate(action, bundle)
     }
 
-
     private fun toNewReminder(view: View) {
-        var plantName = plantDetails.name
+        val plantName = plantDetails.name
         val action = R.id.action_myPlantisFragment_to_newReminderFragment
-        val bundle = bundleOf("plantName" to plantName )
+        val bundle = bundleOf("plantName" to plantName)
         Navigation.findNavController(view).navigate(action, bundle)
     }
 }
