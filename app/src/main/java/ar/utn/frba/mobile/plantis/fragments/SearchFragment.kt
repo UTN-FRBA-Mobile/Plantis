@@ -1,6 +1,7 @@
 package ar.utn.frba.mobile.plantis.fragments
 
 import android.graphics.Bitmap
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.StrictMode
 import android.view.LayoutInflater
@@ -27,10 +28,18 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val cameraHandler = CameraHandler(binding.searchImageView, binding.nextButton , ::registerForActivityResult)
+        val cameraHandler = CameraHandler(binding.searchImageView, binding.nextButton, ::afterTakingPhoto, ::registerForActivityResult)
 
         binding.searchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }
         binding.nextButton.setOnClickListener { goToSearchResults(cameraHandler.lastImageBitmap) }
+    }
+
+    private fun afterTakingPhoto(photoBitmap: Bitmap) {
+        binding.viewFlipper.visibility = View.GONE
+        binding.nextButton.visibility = View.VISIBLE
+        binding.searchImageView.setImageBitmap(photoBitmap)
+        binding.searchImageView.visibility = View.VISIBLE
+
     }
 
     private fun goToSearchResults(lastImage: Bitmap) {

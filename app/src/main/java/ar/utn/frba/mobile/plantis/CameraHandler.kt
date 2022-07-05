@@ -13,16 +13,17 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 
 class CameraHandler (
-    image: ImageView, nextButton: Button,
+    image: ImageView, nextButton: Button, afterTakingPhoto: (Bitmap) -> Unit,
     registerForActivityResult: (contract: StartActivityForResult, callback: ActivityResultCallback<ActivityResult>) -> ActivityResultLauncher<Intent>
 ) {
     lateinit var lastImageBitmap: Bitmap
     private val resultLauncher = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
             val imageBitmap = result.data?.extras?.get("data") as Bitmap
-            image.setImageBitmap(imageBitmap)
-            nextButton.visibility = View.VISIBLE
-            lastImageBitmap= imageBitmap
+//            image.setImageBitmap(imageBitmap)
+//            nextButton.visibility = View.VISIBLE
+//            lastImageBitmap= imageBitmap
+            afterTakingPhoto(imageBitmap)
         }
     }
 

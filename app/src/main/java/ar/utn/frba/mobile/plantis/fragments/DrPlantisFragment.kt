@@ -27,12 +27,15 @@ class DrPlantisFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val cameraHandler = CameraHandler(binding.drplantisSearchImageView, binding.drplantisNextButton, ::registerForActivityResult)
+        val cameraHandler = CameraHandler(binding.drplantisSearchImageView, binding.drplantisNextButton,::algo, ::registerForActivityResult)
 
         binding.drplantisSearchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }
         binding.drplantisNextButton.setOnClickListener {
             goToHealthResults(cameraHandler.lastImageBitmap)
         }
+    }
+    fun algo(bitmap: Bitmap){
+        print("TODO")
     }
     private fun goToHealthResults(lastImage: Bitmap) {
         val action = R.id.action_drPlantisFragment_to_drPlantisSearchResultsFragment
