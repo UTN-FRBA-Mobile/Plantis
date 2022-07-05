@@ -7,6 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/start_search_layout"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
@@ -68,7 +69,6 @@
             android:textAlignment="center"
             android:text="@string/explanation_how_to_take_photo" />
 
-
         <Button
             android:id="@+id/search_button"
             android:layout_gravity="center_horizontal"
@@ -79,22 +79,42 @@
             android:textColor="@color/eggshellWhite"
             android:text="@string/tomar_foto" />
     </LinearLayout>
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:src="@mipmap/ic_my_garden"
-        android:id="@+id/searchImageView"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/results_layout"
         android:visibility="invisible"
-        android:contentDescription="@string/plant_icon" />
-
-    <Button
-        android:id="@+id/next_button"
         android:layout_gravity="center"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/siguiente"
-        android:visibility="invisible" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_my_garden"
+            android:id="@+id/searchImageView"
+            android:contentDescription="@string/plant_icon" />
+
+        <Button
+            android:id="@+id/another_photo_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:textSize="15sp"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/black"
+            android:text="@string/take_another_photo" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@color/brown"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/eggshellWhite"
+            android:text="@string/see_results" />
+
+    </LinearLayout>
+
 </FrameLayout>
