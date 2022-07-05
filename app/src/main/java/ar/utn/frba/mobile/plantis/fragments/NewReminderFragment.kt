@@ -58,7 +58,7 @@ class NewReminderFragment : Fragment() {
         )
         val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
         val newReminderTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-        scheduleNotification()
+        scheduleNotification(4,hour, minute)
         PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newReminderTime, newReminderDays, true), plantName)
         Navigation.findNavController(view).popBackStack()
     }
@@ -75,12 +75,20 @@ class NewReminderFragment : Fragment() {
         timePickerDialog.show()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun scheduleNotification()
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun scheduleNotification(dayOfWeek: Int, hour: Int, minute: Int)
     {
         val intent = Intent(context, Notification::class.java)
         val title = "Plantis"
         val message = "It's time to water PLANTNAME!"
+        val calendar = Calendar.getInstance()
+        val cal: Calendar = Calendar.Builder()
+            .setDate(2022,6,5)
+            .setTimeOfDay(hour,minute,0)
+            .build()
+
+        calendar[Calendar.DAY_OF_WEEK] = dayOfWeek
+
         intent.putExtra(titleExtra, title)
         intent.putExtra(messageExtra, message)
 
@@ -93,12 +101,8 @@ class NewReminderFragment : Fragment() {
 
         val alarmManager = activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
         val time = getTime()
-        alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            time,
-            pendingIntent
-        )
-//        showAlert(time, title, message)
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis, AlarmManager.INTERVAL_DAY * 7, pendingIntent);
     }
     private fun getTime(): Long
     {
