@@ -3,10 +3,12 @@ package ar.utn.frba.mobile.plantis.fragments
 
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import ar.utn.frba.mobile.plantis.PlantisStorage
@@ -39,6 +41,7 @@ class NewReminderFragment : Fragment() {
         Navigation.findNavController(view).popBackStack()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun addReminder(view: View) {
         val newReminderName = binding.newReminderName.text.toString()
         val days = mapOf(
@@ -51,8 +54,8 @@ class NewReminderFragment : Fragment() {
             DayOfWeek.SUNDAY to binding.daypickerSunday,
         )
         val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
-        val newRemindarTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-        PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newRemindarTime, newReminderDays, true), plantName)
+        val newReminderTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+        PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newReminderTime, newReminderDays, true), plantName)
         Navigation.findNavController(view).popBackStack()
     }
 
