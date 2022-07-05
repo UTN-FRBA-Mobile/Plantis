@@ -11,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ar.utn.frba.mobile.plantis.databinding.MainActivityBinding
-import ar.utn.frba.mobile.plantis.fragments.notificationListener
+//import ar.utn.frba.mobile.plantis.fragments.notificationListener
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), notificationListener {
+class MainActivity : AppCompatActivity(){//, notificationListener {
     lateinit var binding: MainActivityBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), notificationListener {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    override fun scheduleNotification()
+    fun scheduleNotification()
     {
         val intent = Intent(applicationContext, Notification::class.java)
         val title = "Plantis"
