@@ -1,60 +1,77 @@
 package ar.utn.frba.mobile.plantis.fragments
 
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
-import ar.utn.frba.mobile.plantis.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import ar.utn.frba.mobile.plantis.*
 import ar.utn.frba.mobile.plantis.databinding.FragmentRemindersBinding
-import java.util.*
-
+import java.time.DayOfWeek
+import java.time.LocalDate
 
 class RemindersFragment : Fragment() {
-    private lateinit var binding: FragmentRemindersBinding
-    private var listener: notificationListener? = null
-    private var _binding: FragmentRemindersBinding? = null
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentRemindersBinding.inflate(inflater,container,false)
+    lateinit var binding: FragmentRemindersBinding
+    lateinit var recyclerView: RecyclerView
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentRemindersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.submitButton.setOnClickListener { onButtonPressed() }
-    }
 
-    private fun onButtonPressed() {
-        listener?.scheduleNotification()
-    }
+        val storagePlants = PlantisStorage.getPlantis(requireActivity()).second.plants
 
+        val allReminders =
+            storagePlants
+                .flatMap { plant ->
+                    plant.reminders.map { reminder ->
+                        ReminderAndPlant(reminder, plant.name, plant.imageUrl)
+                    }
+                }
+                .filter { it.reminder.isActive!! }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is notificationListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
+        val days = getListOfDaysStartingWithToday()
+        val reminders = days.flatMap { getDayReminders(it, allReminders) }
+
+        val viewManager = LinearLayoutManager(this.context)
+        val viewAdapter = AllRemindersAdapter(view, reminders)
+
+        recyclerView = binding.myRecyclerView.apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
         }
     }
 
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
+    private fun getListOfDaysStartingWithToday(): MutableList<DayOfWeek> {
+        val days = mutableListOf<DayOfWeek>()
+        val today = LocalDate.now().dayOfWeek
+        var j = today.value
+        days.add(today)
+        for (i in 1..6) {
+            val day = DayOfWeek.of(j).plus(1)
+            days.add(day)
+            if (j == 7) j = 1 else j++
+        }
+        return days
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+    // TODO filter only active reminders
+    private fun getDayReminders(day: DayOfWeek, allReminders: List<ReminderAndPlant>): List<Any> {
+        val dayReminders = mutableListOf<Any>(day)
+
+        val remindersFiltered = allReminders.filter { it.reminder.frequency!!.contains(day) }.sortedBy { it.reminder.hour }
+        if (remindersFiltered.isNullOrEmpty())
+            dayReminders.add(NoReminders())
+        else
+            remindersFiltered.forEach { dayReminders.add(it) }
+        return dayReminders
     }
-
-
 }
 
-interface notificationListener {
-    fun scheduleNotification()
-}
+data class ReminderAndPlant(val reminder: Reminder, val plantName: String?, val plantImageUrl: String?)
+class NoReminders

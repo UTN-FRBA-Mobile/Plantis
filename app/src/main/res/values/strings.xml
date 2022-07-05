@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Plantis</string>
     <string name="my_garden">My Garden</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reminder_name">Reminder name</string>
+    <string name="reminder_day">Reminder day</string>
+    <string name="reminder_time">Reminder time</string>
     <string name="search">Search</string>
     <string name="dr_plantis">Dr Plantis</string>
     <string name="reminders">Reminders</string>
