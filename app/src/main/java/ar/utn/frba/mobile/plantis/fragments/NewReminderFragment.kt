@@ -1,21 +1,17 @@
 package ar.utn.frba.mobile.plantis.fragments
 
-
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import ar.utn.frba.mobile.plantis.*
+import ar.utn.frba.mobile.plantis.NotificationScheduler
 import ar.utn.frba.mobile.plantis.databinding.FragmentNewReminderBinding
 import java.time.DayOfWeek
 import java.util.*
@@ -23,6 +19,7 @@ import java.util.*
 class NewReminderFragment : Fragment() {
     lateinit var binding: FragmentNewReminderBinding
     lateinit var plantName: String
+    lateinit var notificationScheduler: NotificationScheduler
     var hour = 0
     var minute = 0
 
@@ -31,7 +28,9 @@ class NewReminderFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        notificationScheduler = NotificationScheduler(context, activity)
         plantName = arguments?.getSerializable("plantName") as String
         super.onViewCreated(view, savedInstanceState)
         binding.newReminderTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
@@ -58,7 +57,7 @@ class NewReminderFragment : Fragment() {
         )
         val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
         val newReminderTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-        scheduleNotification(4,hour, minute)
+        notificationScheduler.scheduleNotification(newReminderDays.first(),hour, minute,plantName, newReminderName)
         PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newReminderTime, newReminderDays, true), plantName)
         Navigation.findNavController(view).popBackStack()
     }
@@ -73,48 +72,6 @@ class NewReminderFragment : Fragment() {
         val timePickerDialog = TimePickerDialog(this.context,  onTimeSetListener, hour, minute, true)
         timePickerDialog.setTitle("Select Time")
         timePickerDialog.show()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun scheduleNotification(dayOfWeek: Int, hour: Int, minute: Int)
-    {
-        val intent = Intent(context, Notification::class.java)
-        val title = "Plantis"
-        val message = "It's time to water PLANTNAME!"
-        val calendar = Calendar.getInstance()
-        val cal: Calendar = Calendar.Builder()
-            .setDate(2022,6,5)
-            .setTimeOfDay(hour,minute,0)
-            .build()
-
-        calendar[Calendar.DAY_OF_WEEK] = dayOfWeek
-
-        intent.putExtra(titleExtra, title)
-        intent.putExtra(messageExtra, message)
-
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            notificationID,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val alarmManager = activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
-        val time = getTime()
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis, AlarmManager.INTERVAL_DAY * 7, pendingIntent);
-    }
-    private fun getTime(): Long
-    {
-        val minute = 11
-        val hour = 11
-        val day = 5
-        val month = 6 //Starts in 0
-        val year = 2022
-
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, day, hour, minute)
-        return calendar.timeInMillis
     }
 }
 
