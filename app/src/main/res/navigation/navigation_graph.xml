@@ -80,6 +80,20 @@
             android:name="healthAssessment"
             app:argType="ar.utn.frba.mobile.plantis.client.healthAssesment.HealthAssessment"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_dr_plantis_search_results_to_plant_disease_fragment"
+            app:destination="@id/plant_disease_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/plant_disease_fragment"
+        android:name="ar.utn.frba.mobile.plantis.fragments.PlantDiseaseFragment"
+        android:label="fragment_plant_disease"
+        tools:layout="@layout/fragment_plant_disease" >
+        <argument
+            android:name="diseaseDetails"
+            app:argType="ar.utn.frba.mobile.plantis.client.healthAssesment.DiseaseDetails"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/newReminderFragment"
