@@ -33,8 +33,12 @@ class NotificationScheduler(val context: Context?, val activity: Activity?) {
     {
         val intent = Intent(context, Notification::class.java)
         val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
         val cal: Calendar = Calendar.Builder()
-            .setDate(2022,6,5)
+            .setDate(year,month,day)
             .setTimeOfDay(hour,minute,0)
             .build()
         cal[Calendar.DAY_OF_WEEK] = dayMap[dayOfWeek]!!
