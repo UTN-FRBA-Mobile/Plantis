@@ -5,9 +5,10 @@ import java.time.DayOfWeek
 import java.time.LocalTime
 
 data class Reminder (
-    val name: String,
-    val hour: LocalTime,
-    val frequency: List<DayOfWeek>
+    val name: String? = null,
+    val hour: String? = null,
+    val frequency: List<DayOfWeek>? = null,
+    var isActive: Boolean? = null
 ): Serializable {
-    fun shouldRunEveryDay() = frequency.size == 7
+    fun shouldRunEveryDay() = frequency?.size == 7
 }

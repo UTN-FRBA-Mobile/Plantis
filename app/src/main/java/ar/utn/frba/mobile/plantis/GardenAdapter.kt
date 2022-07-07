@@ -34,7 +34,7 @@ class GardenAdapter(val view: View, val plantList: List<PlantDetail>) : Recycler
         Glide.with(holder.context).load(plant.imageUrl).into(holder.plantImage)
         holder.plantItem.setOnClickListener {
             val action = R.id.action_myGardenFragment_to_myPlantisFragment
-            val bundle = bundleOf("details" to plant)
+            val bundle = bundleOf("details" to plant, "isMyPlant" to true)
             findNavController(view).navigate(action, bundle)
         }
     }
