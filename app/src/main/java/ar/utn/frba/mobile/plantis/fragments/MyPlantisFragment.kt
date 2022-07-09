@@ -53,6 +53,7 @@ class MyPlantisFragment : Fragment() {
         if (!isMyPlant) {
             binding.remindersLayout.visibility = View.GONE
             binding.addReminderButton.visibility = View.GONE
+            binding.editPlantNameButton.visibility = View.GONE
         }
 
         if (wantsToAddPlant)
@@ -68,6 +69,7 @@ class MyPlantisFragment : Fragment() {
 
         binding.addButton.setOnClickListener { openAddPlantDialog(view, plantDetails) }
         binding.addReminderButton.setOnClickListener{ toNewReminder(view) }
+        binding.editPlantNameButton.setOnClickListener{ toEditPlantName(view) }
     }
 
     override fun onPause() {
@@ -117,6 +119,13 @@ class MyPlantisFragment : Fragment() {
     private fun toNewReminder(view: View) {
         val plantName = plantDetails.name
         val action = R.id.action_myPlantisFragment_to_newReminderFragment
+        val bundle = bundleOf("plantName" to plantName)
+        Navigation.findNavController(view).navigate(action, bundle)
+    }
+
+    private fun toEditPlantName(view: View){
+        val plantName = plantDetails.name
+        val action = R.id.action_myPlantisFragment_to_editPlantNameFragment
         val bundle = bundleOf("plantName" to plantName)
         Navigation.findNavController(view).navigate(action, bundle)
     }

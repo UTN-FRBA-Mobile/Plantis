@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_myPlantisFragment_to_newReminderFragment"
             app:destination="@id/newReminderFragment" />
+        <action
+            android:id="@+id/action_myPlantisFragment_to_editPlantNameFragment"
+            app:destination="@id/editPlantNameFragment" />
     </fragment>
 
     <fragment
@@ -103,5 +106,13 @@
         <action
             android:id="@+id/action_newReminderFragment_to_myPlantisFragment"
             app:destination="@id/myPlantisFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPlantNameFragment"
+        android:name="ar.utn.frba.mobile.plantis.fragments.EditPlantNameFragment"
+        android:label="EditPlantNameFragment" >
+        <action
+            android:id="@+id/action_editPlantNameFragment_to_myGardenFragment"
+            app:destination="@id/myGardenFragment" />
     </fragment>
 </navigation>

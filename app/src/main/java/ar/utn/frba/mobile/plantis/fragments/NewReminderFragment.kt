@@ -32,10 +32,10 @@ class NewReminderFragment : Fragment() {
         binding.newReminderTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
         binding.newReminderTimeButton.setOnClickListener{goToTimePicker(view)}
         binding.okNewReminderButton.setOnClickListener{ addReminder(view)}
-        binding.cancelNewReminderButton.setOnClickListener{ toMyGarden(view)}
+        binding.cancelNewReminderButton.setOnClickListener{ toMyPlantis(view)}
     }
 
-    private fun toMyGarden(view: View) {
+    private fun toMyPlantis(view: View) {
         Navigation.findNavController(view).popBackStack()
     }
 
