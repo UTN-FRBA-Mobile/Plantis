@@ -30,7 +30,7 @@ class NewReminderFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        notificationScheduler = NotificationScheduler(context, activity)
+        notificationScheduler = NotificationScheduler(context)
         plantName = arguments?.getSerializable("plantName") as String
         super.onViewCreated(view, savedInstanceState)
         binding.newReminderTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
@@ -57,7 +57,7 @@ class NewReminderFragment : Fragment() {
         )
         val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
         val newReminderTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-        notificationScheduler.scheduleNotification(newReminderDays.first(),hour, minute,plantName, newReminderName)
+        notificationScheduler.scheduleFirstNotifications(newReminderDays.first(),hour, minute,plantName, newReminderName)
         PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newReminderTime, newReminderDays, true), plantName)
         Navigation.findNavController(view).popBackStack()
     }

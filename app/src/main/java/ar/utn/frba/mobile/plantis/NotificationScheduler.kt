@@ -1,61 +1,47 @@
 package ar.utn.frba.mobile.plantis
 
-import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import java.time.DayOfWeek
-import java.util.*
-
-
-enum class Day(val dayOfWeek: Int) {
-    SUNDAY(1),
-    MONDAY(2),
-    TUESDAY(3),
-    WEDNESDAY(4),
-    THURSDAY(5),
-    FRIDAY(6),
-    SATURDAY(7),
-}
+import ar.utn.frba.mobile.plantis.common.getNext
+import ar.utn.frba.mobile.plantis.common.toEpochMilli
+import java.time.*
 
 @RequiresApi(Build.VERSION_CODES.O)
-class NotificationScheduler(val context: Context?, val activity: Activity?) {
-    val dayMap: Map<DayOfWeek, Int> = mapOf(DayOfWeek.MONDAY to 2,
-        DayOfWeek.TUESDAY to 3, DayOfWeek.WEDNESDAY to Calendar.WEDNESDAY,
-        DayOfWeek.THURSDAY to 5, DayOfWeek.FRIDAY to 6,
-        DayOfWeek.SATURDAY to 7, DayOfWeek.SUNDAY to 1)
-
-    fun scheduleNotification(dayOfWeek: DayOfWeek, hour: Int, minute: Int, title: String, message: String)
+class NotificationScheduler(val context: Context?) {
+    fun scheduleFirstNotifications(dayOfWeek: DayOfWeek, hour: Int, minute: Int, plantName: String, reminderName: String)
     {
+        val today = LocalDate.now()
+        val date = today.getNext(dayOfWeek)
+        val dateTime = LocalDateTime.of(date, LocalTime.of(hour, minute, 0, 0))
+
+        scheduleNotification(plantName, reminderName, dateTime, dateTime.toEpochMilli())
+    }
+
+    fun scheduleNextNotification(dateTime: LocalDateTime, plantName: String, reminderName: String) {
+        val nextOccurrence = dateTime.plusDays(7)
+
+        scheduleNotification(plantName, reminderName, nextOccurrence, nextOccurrence.toEpochMilli())
+    }
+
+    private fun scheduleNotification(plantName: String, reminderName: String, dateTime: LocalDateTime, dateTimeInMillis: Long) {
         val intent = Intent(context, Notification::class.java)
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val cal: Calendar = Calendar.Builder()
-            .setDate(year,month,day)
-            .setTimeOfDay(hour,minute,0)
-            .build()
-        cal[Calendar.DAY_OF_WEEK] = dayMap[dayOfWeek]!!
-
-        intent.putExtra(titleExtra, title)
-        intent.putExtra(messageExtra, message)
+        intent.apply {
+            putExtra(PLANT_NAME, plantName)
+            putExtra(REMINDER_NAME, reminderName)
+            putExtra(DATE_TIME, dateTime.toString())
+        }
 
         val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            notificationID,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            context, notificationID,
+            intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        val alarmManager = activity?.getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            cal.timeInMillis, AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateTimeInMillis, pendingIntent)
     }
 }
