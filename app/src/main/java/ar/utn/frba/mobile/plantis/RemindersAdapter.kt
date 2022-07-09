@@ -1,17 +1,19 @@
 package ar.utn.frba.mobile.plantis
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import java.time.DayOfWeek
 
-class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder>() {
+class RemindersAdapter(val view: View, val remindersList: List<Reminder>, val plantName: String) : RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder>() {
 
     class RemindersViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
         val reminder: LinearLayout = view.findViewById(R.id.reminder_item)
@@ -61,9 +63,26 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun changeSwitchState(holder: RemindersViewHolder, reminder: Reminder) {
         changeReminderColor(holder)
+        changeReminderNotifications(holder, reminder)
         reminder.isActive = holder.switch.isChecked
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun changeReminderNotifications(holder: RemindersViewHolder, reminder: Reminder) {
+        val notificationScheduler = NotificationScheduler(holder.context)
+        val _hour = reminder.hour!!.take(2).toInt()
+        val _minute = reminder.hour.takeLast(2).toInt()
+
+        if (holder.switch.isChecked) {
+
+        } else {
+            notificationScheduler.cancel(
+                reminder.frequency!!.first(), _hour, _minute, plantName, reminder.name!!
+            )
+        }
     }
 
     private fun changeReminderColor(holder: RemindersViewHolder) {

@@ -59,7 +59,7 @@ class MyPlantisFragment : Fragment() {
             binding.addButton.visibility = View.VISIBLE
 
         val viewManager = LinearLayoutManager(this.context)
-        val viewAdapter = RemindersAdapter(view, plantDetails.reminders)
+        val viewAdapter = RemindersAdapter(view, plantDetails.reminders, plantDetails.name!!)
 
         recyclerView = binding.plantisReminders.apply {
             layoutManager = viewManager
