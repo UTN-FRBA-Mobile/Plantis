@@ -9,18 +9,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="355dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:background="@color/lightGray">
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/background_floating_fragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,12 +46,12 @@
             <TextView
                 android:id="@+id/my_plant_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="PlantiName"
                 android:textColor="#000"
-                android:textStyle="bold"/>
+                android:textSize="18dp"
+                android:gravity="center"/>
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +90,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"

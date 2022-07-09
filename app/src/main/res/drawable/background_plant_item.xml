@@ -12,8 +12,8 @@
             <!-- setting the thickness of shadow (positive value will give shadow on that side) -->
 
             <padding
-                android:bottom="2dp"
-                android:left="2dp"
+                android:bottom="3dp"
+                android:left="3dp"
                 android:right="-1dp"
                 android:top="-1dp" />
 
