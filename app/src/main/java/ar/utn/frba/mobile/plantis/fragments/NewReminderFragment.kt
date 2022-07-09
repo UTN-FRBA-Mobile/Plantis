@@ -57,8 +57,15 @@ class NewReminderFragment : Fragment() {
         )
         val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
         val newReminderTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-        notificationScheduler.scheduleFirstNotifications(newReminderDays.first(), hour, minute, plantName, newReminderName)
-        PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newReminderTime, newReminderDays, true), plantName)
+        val newReminder = PlantisStorage.addReminder(
+            requireActivity(),
+            Reminder(name = newReminderName, hour = newReminderTime, isActive = true),
+            newReminderDays,
+            plantName
+        )
+
+        notificationScheduler.scheduleFirstNotifications(newReminder, plantName)
+
         Navigation.findNavController(view).popBackStack()
     }
 

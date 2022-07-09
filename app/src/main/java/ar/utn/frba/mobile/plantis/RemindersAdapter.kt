@@ -39,6 +39,7 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>, val pl
         return RemindersViewHolder(view, context)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RemindersViewHolder, position: Int) {
         val reminder = remindersList[position]
         holder.name.text = reminder.name
@@ -57,7 +58,7 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>, val pl
             return
         }
 
-        reminder.frequency?.forEach { dayOfWeek ->
+        reminder.frequency.keys.forEach { dayOfWeek ->
             val textView = holder.days[dayOfWeek]
             textView?.setTextColor(ContextCompat.getColor(holder.context, R.color.brown))
         }
@@ -73,15 +74,11 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>, val pl
     @RequiresApi(Build.VERSION_CODES.O)
     private fun changeReminderNotifications(holder: RemindersViewHolder, reminder: Reminder) {
         val notificationScheduler = NotificationScheduler(holder.context)
-        val _hour = reminder.hour!!.take(2).toInt()
-        val _minute = reminder.hour.takeLast(2).toInt()
 
         if (holder.switch.isChecked) {
-
+            notificationScheduler.scheduleFirstNotifications(reminder, plantName)
         } else {
-            notificationScheduler.cancel(
-                reminder.frequency!!.first(), _hour, _minute, plantName, reminder.name!!
-            )
+            notificationScheduler.cancel(reminder, plantName)
         }
     }
 

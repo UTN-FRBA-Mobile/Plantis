@@ -3,7 +3,10 @@ package ar.utn.frba.mobile.plantis
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.fasterxml.jackson.databind.ObjectMapper
+import java.time.DayOfWeek
 
 object PlantisStorage {
     private const val mode = Context.MODE_PRIVATE
@@ -16,10 +19,28 @@ object PlantisStorage {
         writePlantisInStorage(plantis, sharedPreferences)
     }
 
-    fun addReminder(activity: Activity, reminder: Reminder, plantName: String){
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun addReminder(activity: Activity, reminder: Reminder, newReminderDays: List<DayOfWeek>, plantName: String): Reminder {
         val (sharedPreferences, plantis) = getPlantis(activity)
+        reminder.frequency = getFrequency(plantis.plants, newReminderDays)
+
         plantis.plants.find { it.name == plantName }?.reminders?.add(reminder)
         writePlantisInStorage(plantis, sharedPreferences)
+        return reminder
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getFrequency(plants: MutableList<PlantDetail>, newReminderDays: List<DayOfWeek>): Map<DayOfWeek, Int> {
+        val ids = plants.flatMap { it.reminders }.flatMap { it.frequency.values }
+        val lastId = ids.maxOrNull() ?: 0
+
+        val frequency = mutableMapOf<DayOfWeek, Int>()
+        var nextId = lastId + 1
+        newReminderDays.forEach {
+            frequency[it] = nextId
+            nextId+=1
+        }
+        return frequency
     }
 
     fun getPlantis(activity: Activity): Pair<SharedPreferences, Plantis> {
