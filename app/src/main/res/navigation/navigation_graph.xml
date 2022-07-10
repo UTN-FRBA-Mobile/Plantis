@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_myPlantisFragment_to_editPlantNameFragment"
             app:destination="@id/editPlantNameFragment" />
+        <action
+            android:id="@+id/action_myPlantisFragment_to_newPlantFragment"
+            app:destination="@id/newPlantFragment" />
     </fragment>
 
     <fragment
@@ -113,6 +116,14 @@
         android:label="EditPlantNameFragment" >
         <action
             android:id="@+id/action_editPlantNameFragment_to_myGardenFragment"
+            app:destination="@id/myGardenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPlantFragment"
+        android:name="ar.utn.frba.mobile.plantis.fragments.NewPlantFragment"
+        android:label="NewPlantFragment" >
+        <action
+            android:id="@+id/action_newPlantFragment_to_myGardenFragment"
             app:destination="@id/myGardenFragment" />
     </fragment>
 </navigation>
