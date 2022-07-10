@@ -23,6 +23,7 @@ class RemindersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).setTopBarTitle("Reminders")
 
         val storagePlants = PlantisStorage.getPlantis(requireActivity()).second.plants
 

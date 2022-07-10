@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
-import ar.utn.frba.mobile.plantis.PlantDetail
-import ar.utn.frba.mobile.plantis.PlantisStorage
-import ar.utn.frba.mobile.plantis.R
-import ar.utn.frba.mobile.plantis.Reminder
+import ar.utn.frba.mobile.plantis.*
 import ar.utn.frba.mobile.plantis.databinding.FragmentNewPlantBinding
 import io.github.muddz.styleabletoast.StyleableToast
 import java.time.DayOfWeek
@@ -29,6 +26,7 @@ class NewPlantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         plantDetails = arguments?.getSerializable("plantDetails") as PlantDetail
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).setTopBarTitle("")
         binding.customePlantName.setText(plantDetails.name)
         binding.okNewPlantButton.setOnClickListener{ addPlantis(view, plantDetails)}
         binding.cancelNewPlantButton.setOnClickListener{ toMyGarden(view)}

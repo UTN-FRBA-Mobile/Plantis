@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ar.utn.frba.mobile.plantis.CameraHandler
+import ar.utn.frba.mobile.plantis.MainActivity
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.client.healthAssesment.PlantIdHealth
 import ar.utn.frba.mobile.plantis.client.healthAssesment.PlantIdHealthMock
@@ -27,6 +28,9 @@ class DrPlantisFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as MainActivity).setTopBarTitle("Dr Plantis")
+
         val cameraHandler = CameraHandler(::afterTakingPhoto, ::registerForActivityResult)
 
         binding.drplantisSearchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }

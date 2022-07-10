@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.DrPlantisResultsAdapter
+import ar.utn.frba.mobile.plantis.MainActivity
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.R.layout.fragment_dr_plantis_search_results
 import ar.utn.frba.mobile.plantis.SearchResultsAdapter
@@ -30,6 +31,7 @@ class DrPlantisSearchResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).setTopBarTitle("Dr Plantis Search Results")
 
         val healthAssessment = arguments?.getParcelable<HealthAssessment>("healthAssessment")
 //        binding.isHealthyProbText.text = _context.getString(R.string.health_probability,"%.2f".format(healthAssessment?.isHealthyProbability))
