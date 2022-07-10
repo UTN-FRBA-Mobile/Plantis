@@ -27,14 +27,7 @@ class DrPlantisSearchResultsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDrPlantisSearchResultsBinding.inflate(inflater, container, false)
         _context = container!!.context
-//        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
-//        activity?.actionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_add_24);
 
-//        val toolbar = activity?.findViewById<Toolbar>(R.id.toolbar)
-//        toolbar?.setNavigationIcon(R.drawable.ic_baseline_add_24)
-//        toolbar?.setNavigationOnClickListener{
-//            activity?.onBackPressed();
-//        }
         return binding.root
     }
 
