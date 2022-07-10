@@ -24,4 +24,5 @@
     <string name="take_another_photo">Take another photo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_avaliable_info">No available information</string>
 </resources>
