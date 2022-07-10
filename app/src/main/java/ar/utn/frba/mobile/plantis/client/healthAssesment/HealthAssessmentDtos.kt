@@ -46,6 +46,8 @@ data class DiseaseDetails(
     val cause: String?,
     @JsonProperty("url")
     val url: String?,
+    @JsonProperty("description")
+    val description: String?,
     @JsonProperty("treatment")
     val treatment : Treatment
 ): Parcelable

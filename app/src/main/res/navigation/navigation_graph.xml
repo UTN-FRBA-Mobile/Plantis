@@ -100,6 +100,10 @@
             android:name="diseaseDetails"
             app:argType="ar.utn.frba.mobile.plantis.client.healthAssesment.DiseaseDetails"
             android:defaultValue="@null" />
+        <argument
+            android:name="diseaseName"
+            app:argType="string"
+            android:defaultValue="Disease" />
     </fragment>
     <fragment
         android:id="@+id/newReminderFragment"

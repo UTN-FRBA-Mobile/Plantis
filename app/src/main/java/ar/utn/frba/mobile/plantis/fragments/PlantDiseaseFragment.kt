@@ -22,8 +22,10 @@ class PlantDiseaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val diseaseDetails = arguments?.getParcelable<DiseaseDetails>("diseaseDetails")
+        val diseaseName = arguments?.getString("diseaseName")
 
-        //binding.diseaseName.text = diseaseDetails
+        binding.diseaseName.text = diseaseName
+        binding.diseaseDescription.text = diseaseDetails?.description
         if(diseaseDetails?.treatment?.prevention !== null){
             binding.preventionTreatmentBody.text = parseTreatment(diseaseDetails.treatment.prevention)
         }

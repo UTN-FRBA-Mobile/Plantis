@@ -44,6 +44,7 @@ class DrPlantisResultsAdapter(
             val action = R.id.action_dr_plantis_search_results_to_plant_disease_fragment
             val bundle = bundleOf(
                 "diseaseDetails" to disease?.diseaseDetails,
+                "diseaseName" to disease?.name
             )
             Navigation.findNavController(view).navigate(action, bundle)
         }
