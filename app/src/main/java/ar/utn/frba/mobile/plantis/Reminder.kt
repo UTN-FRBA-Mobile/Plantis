@@ -7,8 +7,8 @@ import java.time.LocalTime
 data class Reminder (
     val name: String? = null,
     val hour: String? = null,
-    val frequency: List<DayOfWeek>? = null,
+    var frequency: Map<DayOfWeek, Int> = mapOf(),
     var isActive: Boolean? = null
 ): Serializable {
-    fun shouldRunEveryDay() = frequency?.size == 7
+    fun shouldRunEveryDay() = frequency.size == 7
 }

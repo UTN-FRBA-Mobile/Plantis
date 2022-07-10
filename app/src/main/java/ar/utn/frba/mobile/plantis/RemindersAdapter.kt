@@ -1,17 +1,19 @@
 package ar.utn.frba.mobile.plantis
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
 import java.time.DayOfWeek
 
-class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder>() {
+class RemindersAdapter(val view: View, val remindersList: List<Reminder>, val plantName: String) : RecyclerView.Adapter<RemindersAdapter.RemindersViewHolder>() {
 
     class RemindersViewHolder(val view: View, val context: Context) : RecyclerView.ViewHolder(view) {
         val reminder: LinearLayout = view.findViewById(R.id.reminder_item)
@@ -37,6 +39,7 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
         return RemindersViewHolder(view, context)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RemindersViewHolder, position: Int) {
         val reminder = remindersList[position]
         holder.name.text = reminder.name
@@ -55,15 +58,28 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>) : Recy
             return
         }
 
-        reminder.frequency?.forEach { dayOfWeek ->
+        reminder.frequency.keys.forEach { dayOfWeek ->
             val textView = holder.days[dayOfWeek]
             textView?.setTextColor(ContextCompat.getColor(holder.context, R.color.brown))
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun changeSwitchState(holder: RemindersViewHolder, reminder: Reminder) {
         changeReminderColor(holder)
+        changeReminderNotifications(holder, reminder)
         reminder.isActive = holder.switch.isChecked
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun changeReminderNotifications(holder: RemindersViewHolder, reminder: Reminder) {
+        val notificationScheduler = NotificationScheduler(holder.context)
+
+        if (holder.switch.isChecked) {
+            notificationScheduler.scheduleNotifications(reminder, plantName)
+        } else {
+            notificationScheduler.cancelNotifications(reminder, plantName)
+        }
     }
 
     private fun changeReminderColor(holder: RemindersViewHolder) {

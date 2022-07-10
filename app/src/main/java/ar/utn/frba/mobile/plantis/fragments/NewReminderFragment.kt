@@ -1,15 +1,18 @@
 package ar.utn.frba.mobile.plantis.fragments
 
-
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import ar.utn.frba.mobile.plantis.*
+import ar.utn.frba.mobile.plantis.NotificationScheduler
+import android.widget.Toast
 import ar.utn.frba.mobile.plantis.PlantisStorage
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.Reminder
@@ -21,6 +24,7 @@ import java.util.*
 class NewReminderFragment : Fragment() {
     lateinit var binding: FragmentNewReminderBinding
     lateinit var plantName: String
+    lateinit var notificationScheduler: NotificationScheduler
     var hour = 0
     var minute = 0
 
@@ -29,7 +33,9 @@ class NewReminderFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        notificationScheduler = NotificationScheduler(context)
         plantName = arguments?.getSerializable("plantName") as String
         super.onViewCreated(view, savedInstanceState)
         binding.newReminderTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
@@ -42,8 +48,10 @@ class NewReminderFragment : Fragment() {
         Navigation.findNavController(view).popBackStack()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun addReminder(view: View) {
         val newReminderName = binding.newReminderName.text.toString()
+
         if(newReminderName == ""){
             StyleableToast.makeText(requireContext(), "Empty reminder name", Toast.LENGTH_LONG, R.style.mytoast).show();
         } else{
@@ -58,7 +66,14 @@ class NewReminderFragment : Fragment() {
             )
             val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
             val newRemindarTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-            PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newRemindarTime, newReminderDays, true), plantName)
+             val newReminder = PlantisStorage.addReminder(
+              requireActivity(),
+              Reminder(name = newReminderName, hour = newReminderTime, isActive = true),
+              newReminderDays,
+              plantName
+            )
+
+            notificationScheduler.scheduleNotifications(newReminder, plantName)
             Navigation.findNavController(view).popBackStack()
         }
     }

@@ -1,17 +1,24 @@
 package ar.utn.frba.mobile.plantis
 
+import android.app.*
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ar.utn.frba.mobile.plantis.databinding.MainActivityBinding
+//import ar.utn.frba.mobile.plantis.fragments.notificationListener
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(){//, notificationListener {
     lateinit var binding: MainActivityBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -26,10 +33,23 @@ class MainActivity : AppCompatActivity() {
         navView.itemIconTintList = null
         navView.setupWithNavController(navController)
 
+        createNotificationChannel()
     }
-
 
     fun getUrlFromIntent(view: View) {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Global.instance.data)))
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel()
+    {
+        val name = "Notif Channel"
+        val desc = "A Description of the Channel"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelID, name, importance)
+        channel.description = desc
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
+
 }
