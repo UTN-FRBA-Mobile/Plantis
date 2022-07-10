@@ -65,12 +65,13 @@ class NewReminderFragment : Fragment() {
                 DayOfWeek.SUNDAY to binding.daypickerSunday,
             )
             val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
-            val newRemindarTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-             val newReminder = PlantisStorage.addReminder(
-              requireActivity(),
-              Reminder(name = newReminderName, hour = newReminderTime, isActive = true),
-              newReminderDays,
-              plantName
+            val newReminderTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+
+            val newReminder = PlantisStorage.addReminder(
+                requireActivity(),
+                Reminder(name = newReminderName, hour = newReminderTime, isActive = true),
+                newReminderDays,
+                plantName
             )
 
             notificationScheduler.scheduleNotifications(newReminder, plantName)
