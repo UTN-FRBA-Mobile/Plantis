@@ -30,6 +30,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).setTopBarTitle("Search Plant")
+        (activity as MainActivity).hideNavigationIcon()
+
         val cameraHandler = CameraHandler(::afterTakingPhoto, ::registerForActivityResult)
 
         binding.searchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }

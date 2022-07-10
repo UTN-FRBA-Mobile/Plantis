@@ -25,6 +25,8 @@ class SearchResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).setTopBarTitle("Search Plant Results")
+        (activity as MainActivity).showNavigationIcon()
+
 
         val suggestions = arguments?.getParcelableArray("suggestions")?.toList()?.filterIsInstance<Suggestion>()
         val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")

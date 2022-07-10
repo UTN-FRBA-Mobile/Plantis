@@ -25,6 +25,7 @@ class MyGardenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as MainActivity).setTopBarTitle("My Garden")
+        (activity as MainActivity).hideNavigationIcon()
 
         val plantList = mutableListOf(
             PlantDetail("Pothos", "Epipremnum aureum",

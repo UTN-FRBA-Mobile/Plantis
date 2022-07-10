@@ -38,6 +38,15 @@ class MainActivity : AppCompatActivity() {
     fun setTopBarTitle(title: String) {
         binding.toolbar.title = title
     }
+    fun showNavigationIcon(){
+        binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_add_24)
+        binding.toolbar.setNavigationOnClickListener{
+            onBackPressed();
+        }
+    }
+    fun hideNavigationIcon(){
+        binding.toolbar.navigationIcon = null
+    }
 
     fun getUrlFromIntent(view: View) {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Global.instance.data)))

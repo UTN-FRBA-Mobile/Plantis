@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,12 +27,21 @@ class DrPlantisSearchResultsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDrPlantisSearchResultsBinding.inflate(inflater, container, false)
         _context = container!!.context
+//        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
+//        activity?.actionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_add_24);
+
+//        val toolbar = activity?.findViewById<Toolbar>(R.id.toolbar)
+//        toolbar?.setNavigationIcon(R.drawable.ic_baseline_add_24)
+//        toolbar?.setNavigationOnClickListener{
+//            activity?.onBackPressed();
+//        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).setTopBarTitle("Dr Plantis Search Results")
+        (activity as MainActivity).showNavigationIcon()
 
         val healthAssessment = arguments?.getParcelable<HealthAssessment>("healthAssessment")
         val viewManager = LinearLayoutManager(this.context)
