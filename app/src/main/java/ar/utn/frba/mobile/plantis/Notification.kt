@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -36,10 +37,14 @@ class Notification : BroadcastReceiver() {
     }
 
     private fun notify(context: Context, plantName: String?, reminderName: String?, alarmId: Int) {
+        val title = "Plantis"
+        val message = "Your $plantName needs you!\nIt's time to $reminderName"
+
         val notification = NotificationCompat.Builder(context, channelID)
-            .setSmallIcon(R.mipmap.ic_plantis_foreground)
-            .setContentTitle(plantName)
-            .setContentText(reminderName)
+            .setContentTitle(title)
+            .setContentText(message)
+            .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_reminders_foreground))
+            .setSmallIcon(R.mipmap.ic_plantis_round)
             .build()
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
