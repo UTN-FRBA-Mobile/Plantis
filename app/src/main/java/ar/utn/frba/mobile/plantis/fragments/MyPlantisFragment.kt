@@ -95,18 +95,9 @@ class MyPlantisFragment : Fragment() {
     }
 
     private fun openAddPlantDialog(view: View, plantDetails: PlantDetail) {
-        val builder = activity.let { AlertDialog.Builder(it) }
-        val alert = builder.apply {
-            setTitle("Add Plant")
-            setMessage("Do you want to add this plant to your Garden?")
-            setPositiveButton("OK") { dialog, _ ->
-                PlantisStorage.addPlant(requireActivity(), plantDetails)
-                toMyGarden(dialog, view)
-            }
-            setNegativeButton("CANCEL") { dialog, _ -> dialog.dismiss() }
-            create()
-        }
-        alert.show()
+        val action = R.id.action_myPlantisFragment_to_newPlantFragment
+        val bundle = bundleOf("plantDetails" to plantDetails)
+        Navigation.findNavController(view).navigate(action, bundle)
     }
 
     private fun toMyGarden(dialog: DialogInterface, view: View) {
