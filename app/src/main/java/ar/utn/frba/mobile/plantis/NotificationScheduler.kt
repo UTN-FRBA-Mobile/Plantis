@@ -12,27 +12,21 @@ import java.time.temporal.TemporalAdjusters
 
 @RequiresApi(Build.VERSION_CODES.O)
 class NotificationScheduler(val context: Context?) {
-    fun scheduleFirstNotifications(reminder: Reminder, plantName: String) {
-        val today = LocalDateTime.now()
-        val hour = reminder.hour!!.take(2).toInt()
-        val minute = reminder.hour.takeLast(2).toInt()
-        val reminderName = reminder.name!!
+    fun scheduleNotifications(reminder: Reminder, plantName: String) {
+        handleNotifications(reminder, plantName, ::scheduleNotification)
+    }
 
-        reminder.frequency.forEach {
-            val date = today.getNext(it.key, hour, minute)
-            val dateTime = LocalDateTime.of(date, LocalTime.of(hour, minute, 0, 0))
-
-            scheduleNotification(plantName, reminderName, dateTime, dateTime.toEpochMilli(), it.value)
-        }
+    fun cancelNotifications(reminder: Reminder, plantName: String) {
+        handleNotifications(reminder, plantName, ::cancelNotification)
     }
 
     fun scheduleNextNotification(dateTime: LocalDateTime, plantName: String, reminderName: String, alarmId: Int) {
         val nextOccurrence = dateTime.plusDays(7)
 
-        scheduleNotification(plantName, reminderName, nextOccurrence, nextOccurrence.toEpochMilli(), alarmId)
+        scheduleNotification(plantName, reminderName, nextOccurrence, alarmId)
     }
 
-    fun cancel(reminder: Reminder, plantName: String) {
+    private fun handleNotifications(reminder: Reminder, plantName: String, handleNotification: (String, String, LocalDateTime, Int) -> Unit) {
         val today = LocalDateTime.now()
         val hour = reminder.hour!!.take(2).toInt()
         val minute = reminder.hour.takeLast(2).toInt()
@@ -42,22 +36,23 @@ class NotificationScheduler(val context: Context?) {
             val date = today.getNext(it.key, hour, minute)
             val dateTime = LocalDateTime.of(date, LocalTime.of(hour, minute, 0, 0))
 
-            val intent = Intent(context, Notification::class.java)
-
-            intent.apply {
-                putExtra(PLANT_NAME, plantName)
-                putExtra(REMINDER_NAME, reminderName)
-                putExtra(DATE_TIME, dateTime.toString())
-            }
-
-            val pendingIntent = PendingIntent.getBroadcast(context, it.value, intent, PendingIntent.FLAG_IMMUTABLE)
-
-            val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.cancel(pendingIntent)
+            handleNotification(plantName, reminderName, dateTime, it.value)
         }
     }
 
-    private fun scheduleNotification(plantName: String, reminderName: String, dateTime: LocalDateTime, dateTimeInMillis: Long, alarmId: Int) {
+    private fun cancelNotification(plantName: String, reminderName: String, dateTime: LocalDateTime, alarmId: Int) {
+        val (pendingIntent, alarmManager) = alarmManagerSetUp(plantName, reminderName, dateTime, alarmId)
+
+        alarmManager.cancel(pendingIntent)
+    }
+
+    private fun scheduleNotification(plantName: String, reminderName: String, dateTime: LocalDateTime, alarmId: Int) {
+        val (pendingIntent, alarmManager) = alarmManagerSetUp(plantName, reminderName, dateTime, alarmId)
+
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, dateTime.toEpochMilli(), pendingIntent)
+    }
+
+    private fun alarmManagerSetUp(plantName: String, reminderName: String, dateTime: LocalDateTime, alarmId: Int): Pair<PendingIntent, AlarmManager> {
         val intent = Intent(context, Notification::class.java)
 
         intent.apply {
@@ -68,9 +63,9 @@ class NotificationScheduler(val context: Context?) {
         }
 
         val pendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, PendingIntent.FLAG_IMMUTABLE)
-
         val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, dateTimeInMillis, pendingIntent)
+
+        return Pair(pendingIntent, alarmManager)
     }
 }
 

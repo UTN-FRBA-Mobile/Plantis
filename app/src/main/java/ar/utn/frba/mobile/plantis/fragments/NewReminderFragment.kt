@@ -64,7 +64,7 @@ class NewReminderFragment : Fragment() {
             plantName
         )
 
-        notificationScheduler.scheduleFirstNotifications(newReminder, plantName)
+        notificationScheduler.scheduleNotifications(newReminder, plantName)
 
         Navigation.findNavController(view).popBackStack()
     }

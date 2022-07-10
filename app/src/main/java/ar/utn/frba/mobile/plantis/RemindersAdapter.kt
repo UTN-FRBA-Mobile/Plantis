@@ -76,9 +76,9 @@ class RemindersAdapter(val view: View, val remindersList: List<Reminder>, val pl
         val notificationScheduler = NotificationScheduler(holder.context)
 
         if (holder.switch.isChecked) {
-            notificationScheduler.scheduleFirstNotifications(reminder, plantName)
+            notificationScheduler.scheduleNotifications(reminder, plantName)
         } else {
-            notificationScheduler.cancel(reminder, plantName)
+            notificationScheduler.cancelNotifications(reminder, plantName)
         }
     }
 
