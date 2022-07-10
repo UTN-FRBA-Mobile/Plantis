@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
+import ar.utn.frba.mobile.plantis.MainActivity
 import ar.utn.frba.mobile.plantis.PlantisStorage
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.databinding.FragmentEditPlantNameBinding
@@ -27,6 +28,7 @@ class EditPlantNameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         plantName = arguments?.getSerializable("plantName") as String
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).setTopBarTitle("")
         binding.myPlantName.text = plantName
         binding.okEditPlantNameButton.setOnClickListener{ changePlantName(view)}
         binding.cancelEditPlantNameButton.setOnClickListener{ toMyPlantis(view)}

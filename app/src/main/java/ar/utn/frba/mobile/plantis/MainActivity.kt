@@ -15,7 +15,7 @@ import ar.utn.frba.mobile.plantis.databinding.MainActivityBinding
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(){//, notificationListener {
+class MainActivity : AppCompatActivity() {
     lateinit var binding: MainActivityBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(){//, notificationListener {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
@@ -34,6 +33,10 @@ class MainActivity : AppCompatActivity(){//, notificationListener {
         navView.setupWithNavController(navController)
 
         createNotificationChannel()
+    }
+
+    fun setTopBarTitle(title: String) {
+        binding.toolbar.title = title
     }
 
     fun getUrlFromIntent(view: View) {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ar.utn.frba.mobile.plantis.MainActivity
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.SearchResultsAdapter
 import ar.utn.frba.mobile.plantis.client.Suggestion
@@ -23,6 +24,7 @@ class SearchResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).setTopBarTitle("Search Plant Results")
 
         val suggestions = arguments?.getParcelableArray("suggestions")?.toList()?.filterIsInstance<Suggestion>()
         val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")

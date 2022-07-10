@@ -24,6 +24,8 @@ class MyGardenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).setTopBarTitle("My Garden")
+
         val plantList = mutableListOf(
             PlantDetail("Pothos", "Epipremnum aureum",
                 """

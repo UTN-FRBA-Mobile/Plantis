@@ -54,6 +54,9 @@ class MyPlantisFragment : Fragment() {
             binding.remindersLayout.visibility = View.GONE
             binding.addReminderButton.visibility = View.GONE
             binding.editPlantNameButton.visibility = View.GONE
+            (activity as MainActivity).setTopBarTitle("")
+        } else {
+            (activity as MainActivity).setTopBarTitle("My Plantis")
         }
 
         if (wantsToAddPlant)

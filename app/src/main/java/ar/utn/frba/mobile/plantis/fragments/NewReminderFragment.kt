@@ -38,6 +38,7 @@ class NewReminderFragment : Fragment() {
         notificationScheduler = NotificationScheduler(context)
         plantName = arguments?.getSerializable("plantName") as String
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).setTopBarTitle("")
         binding.newReminderTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute))
         binding.newReminderTimeButton.setOnClickListener{goToTimePicker(view)}
         binding.okNewReminderButton.setOnClickListener{ addReminder(view)}
