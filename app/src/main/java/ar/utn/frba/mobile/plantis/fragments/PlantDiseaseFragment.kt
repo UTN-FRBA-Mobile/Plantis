@@ -22,7 +22,22 @@ class PlantDiseaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val diseaseDetails = arguments?.getParcelable<DiseaseDetails>("diseaseDetails")
+        val diseaseName = arguments?.getString("diseaseName")
 
-        binding.mainText.text = diseaseDetails?.treatment?.biological?.first()
+        binding.diseaseName.text = diseaseName
+        binding.diseaseDescription.text = diseaseDetails?.description
+        if(diseaseDetails?.treatment?.prevention !== null){
+            binding.preventionTreatmentBody.text = parseTreatment(diseaseDetails.treatment.prevention)
+        }
+        if(diseaseDetails?.treatment?.biological !== null){
+            binding.biologicalTreatmentBody.text = parseTreatment(diseaseDetails.treatment.biological)
+        }
+        if(diseaseDetails?.treatment?.chemical !== null){
+            binding.chemicalTreatmentBody.text = parseTreatment(diseaseDetails.treatment.chemical)
+        }
+    }
+
+    private fun parseTreatment(pasos: List<String>?): String {
+        return pasos!!.joinToString("\n")
     }
 }

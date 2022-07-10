@@ -27,4 +27,5 @@
     <string name="diagnostic_text_button">Diagnostic</string>
     <string name="drPlantisDescription">Take a picture of the most affected part of your plant to get a diagnosis and treatment.</string>
     <string name="drPlantisTitle">Diagnostic your plant in seconds</string>
+    <string name="no_avaliable_info">No available information</string>
 </resources>
