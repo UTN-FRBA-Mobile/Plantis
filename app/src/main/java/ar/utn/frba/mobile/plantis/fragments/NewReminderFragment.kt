@@ -7,11 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import ar.utn.frba.mobile.plantis.PlantisStorage
+import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.Reminder
 import ar.utn.frba.mobile.plantis.databinding.FragmentNewReminderBinding
+import io.github.muddz.styleabletoast.StyleableToast
 import java.time.DayOfWeek
 import java.util.*
 
@@ -41,19 +44,23 @@ class NewReminderFragment : Fragment() {
 
     private fun addReminder(view: View) {
         val newReminderName = binding.newReminderName.text.toString()
-        val days = mapOf(
-            DayOfWeek.MONDAY to binding.daypickerMonday,
-            DayOfWeek.TUESDAY to binding.daypickerTuesday,
-            DayOfWeek.WEDNESDAY to binding.daypickerWednesday,
-            DayOfWeek.THURSDAY to binding.daypickerThursday,
-            DayOfWeek.FRIDAY to binding.daypickerFriday,
-            DayOfWeek.SATURDAY to binding.daypickerSaturdat,
-            DayOfWeek.SUNDAY to binding.daypickerSunday,
-        )
-        val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
-        val newRemindarTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-        PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newRemindarTime, newReminderDays, true), plantName)
-        Navigation.findNavController(view).popBackStack()
+        if(newReminderName == ""){
+            StyleableToast.makeText(requireContext(), "Empty reminder name", Toast.LENGTH_LONG, R.style.mytoast).show();
+        } else{
+            val days = mapOf(
+                DayOfWeek.MONDAY to binding.daypickerMonday,
+                DayOfWeek.TUESDAY to binding.daypickerTuesday,
+                DayOfWeek.WEDNESDAY to binding.daypickerWednesday,
+                DayOfWeek.THURSDAY to binding.daypickerThursday,
+                DayOfWeek.FRIDAY to binding.daypickerFriday,
+                DayOfWeek.SATURDAY to binding.daypickerSaturdat,
+                DayOfWeek.SUNDAY to binding.daypickerSunday,
+            )
+            val newReminderDays = days.filter{ it.value.isChecked }.keys.toList()
+            val newRemindarTime = String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
+            PlantisStorage.addReminder(requireActivity(), Reminder(newReminderName, newRemindarTime, newReminderDays, true), plantName)
+            Navigation.findNavController(view).popBackStack()
+        }
     }
 
     fun goToTimePicker(view: View?) {

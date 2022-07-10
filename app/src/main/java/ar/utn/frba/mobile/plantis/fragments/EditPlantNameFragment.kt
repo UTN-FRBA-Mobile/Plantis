@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import ar.utn.frba.mobile.plantis.PlantisStorage
 import ar.utn.frba.mobile.plantis.R
 import ar.utn.frba.mobile.plantis.databinding.FragmentEditPlantNameBinding
-import ar.utn.frba.mobile.plantis.databinding.FragmentNewReminderBinding
+import io.github.muddz.styleabletoast.StyleableToast
 import java.util.*
 
 class EditPlantNameFragment : Fragment() {
@@ -43,8 +44,12 @@ class EditPlantNameFragment : Fragment() {
 
     private fun changePlantName(view: View){
         val newPlantName = binding.newPlantName.text.toString()
-        PlantisStorage.changePlantName(requireActivity(), newPlantName, plantName)
-        toMyGarden(view)
+        if(newPlantName == ""){
+            StyleableToast.makeText(requireContext(), "Empty plant name", Toast.LENGTH_LONG, R.style.mytoast).show();
+        } else{
+            PlantisStorage.changePlantName(requireActivity(), newPlantName, plantName)
+            toMyGarden(view)
+        }
     }
 
 }
