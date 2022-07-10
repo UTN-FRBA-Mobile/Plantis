@@ -5,33 +5,116 @@
     android:layout_height="match_parent"
     tools:context=".fragments.SearchFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/search" />
+        android:id="@+id/start_search_layout"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ViewFlipper
+            android:id="@+id/viewFlipper"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:inAnimation="@android:anim/slide_in_left"
+            android:outAnimation="@android:anim/slide_out_right"
+            android:autoStart="true">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/search_icon_1"
+                android:contentDescription="@string/plant_icon" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/search_icon_2"
+                android:contentDescription="@string/plant_icon" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/search_icon_3"
+                android:contentDescription="@string/plant_icon" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/search_icon_4"
+                android:contentDescription="@string/plant_icon" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/search_icon_5"
+                android:contentDescription="@string/plant_icon" />
+        </ViewFlipper>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:text="@string/search_description" />
+
+        <TextView
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:text="@string/explanation_how_to_take_photo" />
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@color/brown"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/eggshellWhite"
+            android:text="@string/tomar_foto" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/results_layout"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:src="@mipmap/ic_my_garden"
-        android:id="@+id/searchImageView" />
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_my_garden"
+            android:id="@+id/searchImageView"
+            android:contentDescription="@string/plant_icon" />
 
-    <Button
-        android:id="@+id/search_button"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="400dp"
-        android:text="@string/tomar_foto" />
+        <Button
+            android:id="@+id/another_photo_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:textSize="15sp"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/black"
+            android:text="@string/take_another_photo" />
 
-    <Button
-        android:id="@+id/next_button"
-        android:layout_gravity="center"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:text="@string/siguiente"
-        android:visibility="invisible" />
+        <Button
+            android:id="@+id/next_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@color/brown"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/eggshellWhite"
+            android:text="@string/see_results" />
+
+    </LinearLayout>
+
 </FrameLayout>

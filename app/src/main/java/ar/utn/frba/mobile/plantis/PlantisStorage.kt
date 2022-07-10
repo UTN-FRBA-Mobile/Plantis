@@ -57,6 +57,12 @@ object PlantisStorage {
         return plantis.plants.find { it.name == plantName }?.reminders ?: mutableListOf()
     }
 
+    fun changePlantName(activity: Activity, newPlantName: String, plantName: String) {
+        val (sharedPreferences, plantis) = getPlantis(activity)
+        plantis.plants.find { it.name == plantName }?.changeName(newPlantName)
+        writePlantisInStorage(plantis, sharedPreferences)
+    }
+
     private fun writePlantisInStorage(plantis: Plantis, sharedPreferences: SharedPreferences) {
         val plantisJson = ObjectMapper().writeValueAsString(plantis)
         with(sharedPreferences.edit()) {
