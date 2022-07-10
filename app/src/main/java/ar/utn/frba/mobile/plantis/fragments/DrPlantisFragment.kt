@@ -30,13 +30,13 @@ class DrPlantisFragment : Fragment() {
         val cameraHandler = CameraHandler(::afterTakingPhoto, ::registerForActivityResult)
 
         binding.drplantisSearchButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }
-        binding.drplantisNextButton.setOnClickListener {
-            goToHealthResults(cameraHandler.lastImageBitmap)
-        }
+        binding.drplantisNextButton.setOnClickListener { goToHealthResults(cameraHandler.lastImageBitmap) }
+        binding.anotherPhotoButton.setOnClickListener { cameraHandler.launchTakePictureIntent() }
     }
     fun afterTakingPhoto(photoBitmap: Bitmap){
-        binding.drplantisNextButton.visibility = View.VISIBLE
-        binding.drplantisSearchImageView.setImageBitmap(photoBitmap)
+        binding.searchImageView.setImageBitmap(photoBitmap)
+        binding.startSearchLayout.visibility = View.GONE
+        binding.resultsLayout.visibility = View.VISIBLE
     }
     private fun goToHealthResults(lastImage: Bitmap) {
         val action = R.id.action_drPlantisFragment_to_drPlantisSearchResultsFragment

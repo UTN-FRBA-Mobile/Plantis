@@ -32,13 +32,12 @@ class DrPlantisSearchResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val healthAssessment = arguments?.getParcelable<HealthAssessment>("healthAssessment")
-//        binding.isHealthyProbText.text = _context.getString(R.string.health_probability,"%.2f".format(healthAssessment?.isHealthyProbability))
         val viewManager = LinearLayoutManager(this.context)
         val viewAdapter = DrPlantisResultsAdapter(view, healthAssessment!!)
         val healthyProbabilitity = healthAssessment?.isHealthyProbability!!
+        val progress = getHealthLevel(healthyProbabilitity)
 
-        binding.progressCircular.progress = getHealthLevel(healthyProbabilitity)
-
+        binding.progressCircular.setProgressCompat(progress, true)
         if(healthyProbabilitity >= 0.70){
             binding.healthText.text = "Healthy"
         }
