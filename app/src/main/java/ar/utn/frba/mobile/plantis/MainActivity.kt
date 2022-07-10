@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.title = title
     }
     fun showNavigationIcon(){
-        binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_add_24)
+        binding.toolbar.setNavigationIcon(androidx.appcompat.R.drawable.abc_ic_ab_back_material)
         binding.toolbar.setNavigationOnClickListener{
-            onBackPressed();
+            onBackPressed()
         }
     }
     fun hideNavigationIcon(){
