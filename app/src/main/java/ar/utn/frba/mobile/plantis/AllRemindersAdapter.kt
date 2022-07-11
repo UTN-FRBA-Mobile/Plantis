@@ -31,7 +31,7 @@ class AllRemindersAdapter(val view: View, val remindersList: List<Any>) : Recycl
             plantName.text = reminder.plantName
             reminderName.text = reminder.reminder.name
             reminderHour.text = reminder.reminder.hour
-            Glide.with(context).load(reminder.plantImageUrl).into(plantImage)
+            Glide.with(context).load(reminder.plantImageUrl).fitCenter().into(plantImage)
         }
 
         private fun bindDay(day: DayOfWeek) {

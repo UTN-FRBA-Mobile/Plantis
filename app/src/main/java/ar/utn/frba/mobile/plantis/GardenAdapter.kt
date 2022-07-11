@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class GardenAdapter(val view: View, val plantList: List<PlantDetail>) : RecyclerView.Adapter<GardenAdapter.GardenViewHolder>() {
 
@@ -31,7 +32,7 @@ class GardenAdapter(val view: View, val plantList: List<PlantDetail>) : Recycler
         val plant = plantList[position]
         holder.plantTextView.text = plant.name
         holder.plantScientificNameTextView.text = plant.scientificName
-        Glide.with(holder.context).load(plant.imageUrl).into(holder.plantImage)
+        Glide.with(holder.context).load(plant.imageUrl).fitCenter().into(holder.plantImage)
         holder.plantItem.setOnClickListener {
             val action = R.id.action_myGardenFragment_to_myPlantisFragment
             val bundle = bundleOf("details" to plant, "isMyPlant" to true)
