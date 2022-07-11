@@ -127,18 +127,30 @@ class MyPlantisFragment : Fragment() {
     }
 
     private fun deletePlant(view: View, plant: PlantDetail){
-        for (reminder in plant.reminders) {
-            if(reminder.isActive!!){
-                val notificationScheduler = NotificationScheduler(context)
-                notificationScheduler.cancelNotifications(reminder, plant.name!!)
+
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage("Are you sure you want to Delete?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+
+                for (reminder in plant.reminders) {
+                    if(reminder.isActive!!){
+                        val notificationScheduler = NotificationScheduler(context)
+                        notificationScheduler.cancelNotifications(reminder, plant.name!!)
+                    }
+                }
+                PlantisStorage.deletePlant(requireActivity(),plant)
+                val action = R.id.action_myPlantisFragment_to_myGardenFragment
+                val bundle = bundleOf()
+                Navigation.findNavController(view).navigate(action, bundle)
             }
-        }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.dismiss()
+            }
 
-        PlantisStorage.deletePlant(requireActivity(),plant)
+        val alert = builder.create()
 
-        val action = R.id.action_myPlantisFragment_to_myGardenFragment
-        val bundle = bundleOf()
-        Navigation.findNavController(view).navigate(action, bundle)
+        alert.show()
 
     }
 }
