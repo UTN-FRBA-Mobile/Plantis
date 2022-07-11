@@ -30,6 +30,7 @@ class DrPlantisFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as MainActivity).setTopBarTitle("Dr Plantis")
+        (activity as MainActivity).hideNavigationIcon()
 
         val cameraHandler = CameraHandler(::afterTakingPhoto, ::registerForActivityResult)
 

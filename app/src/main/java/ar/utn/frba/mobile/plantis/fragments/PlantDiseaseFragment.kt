@@ -23,6 +23,7 @@ class PlantDiseaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).setTopBarTitle("Plant Disease")
+        (activity as MainActivity).showNavigationIcon()
         val diseaseDetails = arguments?.getParcelable<DiseaseDetails>("diseaseDetails")
         val diseaseName = arguments?.getString("diseaseName")
 

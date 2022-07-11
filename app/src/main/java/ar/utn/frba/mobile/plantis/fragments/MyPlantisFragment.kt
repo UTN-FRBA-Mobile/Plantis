@@ -58,6 +58,7 @@ class MyPlantisFragment : Fragment() {
         } else {
             (activity as MainActivity).setTopBarTitle("My Plantis")
         }
+        (activity as MainActivity).showNavigationIcon()
 
         if (wantsToAddPlant)
             binding.addButton.visibility = View.VISIBLE
