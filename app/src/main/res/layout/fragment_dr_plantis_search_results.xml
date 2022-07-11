@@ -15,7 +15,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_gravity="center">
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -31,13 +31,14 @@
                 android:indeterminate="false"
                 app:indicatorDirectionCircular="clockwise"
                 />
+
             <TextView
                 android:id="@+id/health_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/metallicGreen"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="80dp" />
         </FrameLayout>
@@ -47,22 +48,42 @@
             android:layout_marginTop="-130dp"
             android:background="#FFF"
             android:orientation="vertical">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="20dp"
                 android:text="@string/probable_diseases"
                 android:textColor="#000"
-                android:textSize="23sp"
-                android:textAlignment="center"
+                android:textSize="18sp"
                 android:textStyle="bold"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/dr_plantis_result_recycler_view"
-                android:scrollbars="vertical"
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/brown"
+                android:focusable="false" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dr_plantis_result_recycler_view"
+                    android:scrollbars="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

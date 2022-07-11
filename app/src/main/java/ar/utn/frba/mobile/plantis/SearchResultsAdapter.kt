@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
@@ -20,7 +21,7 @@ class SearchResultsAdapter(
         val titleText: TextView = view.findViewById(R.id.title)
         val icon: ImageView = view.findViewById(R.id.icon)
         val subtitleText: TextView = view.findViewById(R.id.description)
-        val infoButton: ImageView = view.findViewById(R.id.info)
+        val searchItem: LinearLayout = view.findViewById(R.id.search_item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsViewHolder {
@@ -38,7 +39,7 @@ class SearchResultsAdapter(
         holder.titleText.text = plantName
         holder.subtitleText.text = context.getString(R.string.Probabibilidad,"%.2f".format(suggestion.probability))
 
-        holder.infoButton.setOnClickListener {
+        holder.searchItem.setOnClickListener {
             val action = R.id.action_fragment_search_results_to_myPlantisFragment
             val bundle = bundleOf(
                 "details" to mapSuggestionToPlantDetail(suggestion),
