@@ -74,6 +74,8 @@ class MyPlantisFragment : Fragment() {
         binding.addButton.setOnClickListener { openAddPlantDialog(view, plantDetails) }
         binding.addReminderButton.setOnClickListener{ toNewReminder(view) }
         binding.editPlantNameButton.setOnClickListener{ toEditPlantName(view) }
+        binding.deleteButton.setOnClickListener { deletePlant(view, plantDetails) }
+
     }
 
     override fun onPause() {
@@ -123,5 +125,33 @@ class MyPlantisFragment : Fragment() {
         val action = R.id.action_myPlantisFragment_to_editPlantNameFragment
         val bundle = bundleOf("plantName" to plantName)
         Navigation.findNavController(view).navigate(action, bundle)
+    }
+
+    private fun deletePlant(view: View, plant: PlantDetail){
+
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage("Are you sure you want to Delete?")
+            .setCancelable(false)
+            .setPositiveButton("Yes") { dialog, id ->
+
+                for (reminder in plant.reminders) {
+                    if(reminder.isActive!!){
+                        val notificationScheduler = NotificationScheduler(context)
+                        notificationScheduler.cancelNotifications(reminder, plant.name!!)
+                    }
+                }
+                PlantisStorage.deletePlant(requireActivity(),plant)
+                val action = R.id.action_myPlantisFragment_to_myGardenFragment
+                val bundle = bundleOf()
+                Navigation.findNavController(view).navigate(action, bundle)
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.dismiss()
+            }
+
+        val alert = builder.create()
+
+        alert.show()
+
     }
 }
