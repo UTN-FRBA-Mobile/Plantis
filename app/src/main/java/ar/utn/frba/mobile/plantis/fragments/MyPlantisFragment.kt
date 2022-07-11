@@ -127,10 +127,10 @@ class MyPlantisFragment : Fragment() {
     }
 
     private fun deletePlant(view: View, plant: PlantDetail){
-        for (item in plant.reminders) {
-            if(item.isActive!!){
-                //TODO: se cancela el reminder
-                //changeReminderNotifications(holder,reminder)
+        for (reminder in plant.reminders) {
+            if(reminder.isActive!!){
+                val notificationScheduler = NotificationScheduler(context)
+                notificationScheduler.cancelNotifications(reminder, plant.name!!)
             }
         }
 
