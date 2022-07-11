@@ -19,6 +19,12 @@ object PlantisStorage {
         writePlantisInStorage(plantis, sharedPreferences)
     }
 
+    fun deletePlant(activity: Activity, plant: PlantDetail) {
+        val (sharedPreferences, plantis) = getPlantis(activity)
+        plantis.plants.remove(plant)
+        writePlantisInStorage(plantis, sharedPreferences)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun addReminder(activity: Activity, reminder: Reminder, newReminderDays: List<DayOfWeek>, plantName: String): Reminder {
         val (sharedPreferences, plantis) = getPlantis(activity)
