@@ -48,15 +48,15 @@
                             android:id="@+id/my_plant_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_toStartOf="@id/edit_plant_name_button"
                             android:layout_centerInParent="true"
+                            android:layout_toStartOf="@id/edit_plant_name_button"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
                             android:text="Plant Name"
                             android:textColor="#000"
                             android:textSize="21sp"
-                            android:textStyle="bold"
-                            android:ellipsize="end"
-                            android:gravity="center_vertical"
-                            android:maxLines="1" />
+                            android:textStyle="bold" />
 
                         <ImageButton
                             android:id="@+id/edit_plant_name_button"
