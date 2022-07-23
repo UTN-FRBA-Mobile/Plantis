@@ -2,32 +2,51 @@ package ar.utn.frba.mobile.plantis.client
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
-import org.apache.commons.io.IOUtils
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.apache.commons.io.output.ByteArrayOutputStream
 import org.json.JSONObject
-import java.io.InputStream
-import java.io.OutputStream
-import java.net.HttpURLConnection
 import java.net.URL
-import java.nio.charset.StandardCharsets
 import java.util.*
 
 object PlantIdUtils {
     @Throws(Exception::class)
+//    fun sendPostRequest(urlString: String, data: JSONObject): String {
+//        val url = URL(urlString)
+//        val con: HttpURLConnection = url.openConnection() as HttpURLConnection
+//        con.setDoOutput(true)
+//        con.setDoInput(true)
+//        con.setRequestMethod("POST")
+//        con.setRequestProperty("Content-Type", "application/json")
+//        val os: OutputStream = con.getOutputStream()
+//        os.write(data.toString().toByteArray())
+//        os.close()
+//        val inputStream: InputStream = con.getInputStream()
+//        val response: String = IOUtils.toString(inputStream, StandardCharsets.UTF_8.name())
+//        con.disconnect()
+//        return response
+//    }
     fun sendPostRequest(urlString: String, data: JSONObject): String {
         val url = URL(urlString)
-        val con: HttpURLConnection = url.openConnection() as HttpURLConnection
-        con.setDoOutput(true)
-        con.setDoInput(true)
-        con.setRequestMethod("POST")
-        con.setRequestProperty("Content-Type", "application/json")
-        val os: OutputStream = con.getOutputStream()
-        os.write(data.toString().toByteArray())
-        os.close()
-        val inputStream: InputStream = con.getInputStream()
-        val response: String = IOUtils.toString(inputStream, StandardCharsets.UTF_8.name())
-        con.disconnect()
-        return response
+        val requestBody = data.toString()
+
+        var client: OkHttpClient = OkHttpClient();
+            var result: String? = null
+            try {
+                val request = Request.Builder()
+                    .url(url)
+                    .method("POST",requestBody.toRequestBody())
+                    .build()
+                val response = client.newCall(request).execute()
+                result = response.body?.string()
+            }
+            catch(err:Error) {
+                print("Error when executing get request: "+err.localizedMessage)
+            }
+            return result!!
+
+
     }
 
     @SuppressLint("NewApi")
