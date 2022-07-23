@@ -11,42 +11,24 @@ import java.net.URL
 import java.util.*
 
 object PlantIdUtils {
-    @Throws(Exception::class)
-//    fun sendPostRequest(urlString: String, data: JSONObject): String {
-//        val url = URL(urlString)
-//        val con: HttpURLConnection = url.openConnection() as HttpURLConnection
-//        con.setDoOutput(true)
-//        con.setDoInput(true)
-//        con.setRequestMethod("POST")
-//        con.setRequestProperty("Content-Type", "application/json")
-//        val os: OutputStream = con.getOutputStream()
-//        os.write(data.toString().toByteArray())
-//        os.close()
-//        val inputStream: InputStream = con.getInputStream()
-//        val response: String = IOUtils.toString(inputStream, StandardCharsets.UTF_8.name())
-//        con.disconnect()
-//        return response
-//    }
     fun sendPostRequest(urlString: String, data: JSONObject): String {
         val url = URL(urlString)
         val requestBody = data.toString()
 
-        var client: OkHttpClient = OkHttpClient();
-            var result: String? = null
-            try {
-                val request = Request.Builder()
-                    .url(url)
-                    .method("POST",requestBody.toRequestBody())
-                    .build()
-                val response = client.newCall(request).execute()
-                result = response.body?.string()
-            }
-            catch(err:Error) {
-                print("Error when executing get request: "+err.localizedMessage)
-            }
-            return result!!
-
-
+        val client = OkHttpClient()
+        var result: String? = null
+        try {
+            val request = Request.Builder()
+                .url(url)
+                .method("POST",requestBody.toRequestBody())
+                .build()
+            val response = client.newCall(request).execute()
+            result = response.body?.string()
+        }
+        catch(err:Error) {
+            print("Error when executing get request: "+err.localizedMessage)
+        }
+        return result!!
     }
 
     @SuppressLint("NewApi")

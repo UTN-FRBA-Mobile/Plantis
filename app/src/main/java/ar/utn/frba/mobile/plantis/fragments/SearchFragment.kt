@@ -69,11 +69,9 @@ class SearchFragment : Fragment() {
     private fun fetch(lastImage: Bitmap) {
         lifecycleScope.launch(Dispatchers.IO) {
             val result = PlantId().identifyPlantFromImage(lastImage)
-            // Parse result string JSON to data class
             withContext(Dispatchers.Main) {
-                // Update view model
                 viewModel.suggestions = result
-                // Quiza acá iria una pantalla loading
+
                 val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
                 val bundle = bundleOf(
                     "wantsToAddPlant" to wantsToAddPlant
@@ -83,5 +81,4 @@ class SearchFragment : Fragment() {
             }
         }
     }
-
 }

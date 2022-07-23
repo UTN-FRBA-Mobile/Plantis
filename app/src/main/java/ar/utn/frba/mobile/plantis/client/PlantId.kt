@@ -7,8 +7,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-class PlantId() : PlantIdentifierAPI() {
-
+class PlantId : PlantIdentifierAPI() {
     override fun identifyPlant(imageBitmap: Bitmap): String {
         val apiKey = "otJLHGSVrmCZaMP2cBcg72L2r2V8INUFIFen3VUVtDNoHzsWzn"
 

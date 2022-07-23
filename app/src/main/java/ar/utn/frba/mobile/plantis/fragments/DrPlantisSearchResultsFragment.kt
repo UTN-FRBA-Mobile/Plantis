@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.utn.frba.mobile.plantis.DrPlantisResultsAdapter
@@ -17,12 +18,14 @@ import ar.utn.frba.mobile.plantis.SearchResultsAdapter
 import ar.utn.frba.mobile.plantis.client.healthAssesment.HealthAssessment
 import ar.utn.frba.mobile.plantis.databinding.FragmentDrPlantisSearchResultsBinding
 import ar.utn.frba.mobile.plantis.databinding.FragmentMyPlantisBinding
+import ar.utn.frba.mobile.plantis.viewModels.ApiViewModel
 
 class DrPlantisSearchResultsFragment : Fragment() {
     lateinit var binding: FragmentDrPlantisSearchResultsBinding
     lateinit var _context: Context
     lateinit var recyclerView: RecyclerView
     private val fullCircularProgress: Int = 50
+    lateinit var viewModel: ApiViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentDrPlantisSearchResultsBinding.inflate(inflater, container, false)
@@ -36,7 +39,9 @@ class DrPlantisSearchResultsFragment : Fragment() {
         (activity as MainActivity).setTopBarTitle("Dr Plantis Search Results")
         (activity as MainActivity).showNavigationIcon()
 
-        val healthAssessment = arguments?.getParcelable<HealthAssessment>("healthAssessment")
+        viewModel = ViewModelProvider(requireActivity()).get(ApiViewModel::class.java)
+
+        val healthAssessment = viewModel.healthAssessment
         val viewManager = LinearLayoutManager(this.context)
         val viewAdapter = DrPlantisResultsAdapter(view, healthAssessment!!)
         val healthyProbabilitity = healthAssessment?.isHealthyProbability!!
@@ -62,4 +67,4 @@ class DrPlantisSearchResultsFragment : Fragment() {
     private fun getHealthLevel(percentage: Double): Int {
         return (fullCircularProgress * percentage).toInt()
     }
-    }
+}

@@ -1,15 +1,12 @@
 package ar.utn.frba.mobile.plantis.client.healthAssesment
 
-import android.content.Context
 import android.graphics.Bitmap
 import ar.utn.frba.mobile.plantis.client.PlantIdUtils
 import org.json.JSONArray
 import org.json.JSONObject
 
-class PlantIdHealth(val context: Context) : HealthAssesmentAPI() {
-
+class PlantIdHealth : HealthAssesmentAPI() {
     override fun identifyIllness(imageBitmap: Bitmap): String {
-
         val apiKey = "otJLHGSVrmCZaMP2cBcg72L2r2V8INUFIFen3VUVtDNoHzsWzn"
 
         val data = JSONObject()
