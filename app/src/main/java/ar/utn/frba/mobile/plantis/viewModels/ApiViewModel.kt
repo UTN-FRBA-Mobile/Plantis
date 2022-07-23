@@ -12,7 +12,7 @@ class ApiViewModel : ViewModel(){
     var bitmapMutableLiveData: Bitmap? = null
     var suggestions: List<Suggestion>? = null
 
-    fun loadSuggestions() {
+    /*fun loadSuggestions() {
         suggestions = PlantId().identifyPlantFromImage(bitmapMutableLiveData!!)
-    }
-   }
+    }*/
+}

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import ar.utn.frba.mobile.plantis.CameraHandler
@@ -27,7 +28,7 @@ import kotlinx.coroutines.withContext
 
 class SearchFragment : Fragment() {
     lateinit var binding: FragmentSearchBinding
-    lateinit var model: ApiViewModel
+    lateinit var viewModel: ApiViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +38,6 @@ class SearchFragment : Fragment() {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
-        model = ApiViewModel()
         return binding.root
     }
 
@@ -45,6 +45,8 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).setTopBarTitle("Search Plant")
         (activity as MainActivity).hideNavigationIcon()
+
+        viewModel = ViewModelProvider(requireActivity()).get(ApiViewModel::class.java)
 
         val cameraHandler = CameraHandler(::afterTakingPhoto, ::registerForActivityResult)
 
@@ -61,32 +63,23 @@ class SearchFragment : Fragment() {
     }
 
     private fun goToSearchResults(lastImage: Bitmap) {
-
         fetch(lastImage)
-
     }
 
     private fun fetch(lastImage: Bitmap) {
         lifecycleScope.launch(Dispatchers.IO) {
-
-            try {
-                val result = PlantId().identifyPlantFromImage(lastImage)
-                // Parse result string JSON to data class
-                withContext(Dispatchers.Main) {
-                    // Update view model
-                    model.suggestions = result
-                    // Quiza acá iria una pantalla loading
-                    val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
-                    val bundle = bundleOf(
-                        "suggestions" to model.suggestions!!,
-                        "wantsToAddPlant" to true
-                    )
-                    val action = R.id.action_fragment_search_to_fragment_search_results
-                    findNavController().navigate(action, bundle)
-
-                }
-            } catch (err: Error) {
-                print("Error when parsing JSON: " + err.localizedMessage)
+            val result = PlantId().identifyPlantFromImage(lastImage)
+            // Parse result string JSON to data class
+            withContext(Dispatchers.Main) {
+                // Update view model
+                viewModel.suggestions = result
+                // Quiza acá iria una pantalla loading
+                val wantsToAddPlant = arguments?.getBoolean("wantsToAddPlant")
+                val bundle = bundleOf(
+                    "wantsToAddPlant" to wantsToAddPlant
+                )
+                val action = R.id.action_fragment_search_to_fragment_search_results
+                findNavController().navigate(action, bundle)
             }
         }
     }
