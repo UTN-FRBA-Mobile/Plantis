@@ -1,6 +1,5 @@
 package ar.utn.frba.mobile.plantis.client
 
-import android.content.Context
 import android.graphics.Bitmap
 import ar.utn.frba.mobile.plantis.client.PlantIdUtils.base64StringFromBitmap
 import ar.utn.frba.mobile.plantis.client.PlantIdUtils.sendPostRequest
@@ -8,8 +7,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-class PlantId(val context: Context) : PlantIdentifierAPI() {
-
+class PlantId : PlantIdentifierAPI() {
     override fun identifyPlant(imageBitmap: Bitmap): String {
         val apiKey = "otJLHGSVrmCZaMP2cBcg72L2r2V8INUFIFen3VUVtDNoHzsWzn"
 
